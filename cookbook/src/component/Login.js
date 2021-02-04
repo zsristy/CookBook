@@ -1,17 +1,26 @@
 import React, { useRef, useState } from "react";
 import { Button, Card, Form, Alert, Container } from "react-bootstrap";
-
+import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
   const emailRef = useRef();
   const passRef = useRef();
+   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      setLoading(true);
+      await login(emailRef.current.value, passRef.current.value);
+      history.push("/");
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
   };
   return (
     <Container

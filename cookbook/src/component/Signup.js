@@ -1,19 +1,32 @@
 import React, { useRef, useState } from "react";
 import { Button, Card, Form, Alert, Container } from "react-bootstrap";
 import { useHistory,Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 export default function Signup() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passRef = useRef();
+   const { signup } = useAuth();
   const confirmPassRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (passRef.current.value !== confirmPassRef.current.value) {
+      return setError("Password do not match");
+    }
+    try {
+      setLoading(true);
+      await signup(emailRef.current.value, passRef.current.value);
+      history.push('/');
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
   };
   return (
     <Container
