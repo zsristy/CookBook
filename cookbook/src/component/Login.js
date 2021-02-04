@@ -21,7 +21,7 @@ const Login = () => {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card
           style={{
-            backgroundColor: " rgba(222,184,135, 0.8)",
+            backgroundColor: " rgba(255,255,255, 0.6)",
             color: "black",
           }}
         >

@@ -23,7 +23,7 @@ export default function Signup() {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card
           style={{
-            backgroundColor: " rgba(222,184,135, 0.8)",
+            backgroundColor: " rgba(255,255,255, 0.6)",
             color: "black",
           }}
         >
@@ -60,7 +60,7 @@ export default function Signup() {
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2" style={{color:'white'}}>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}>
           Already Have an Account? <Link to="/login">Log In!</Link>
         </div>
       </div>
