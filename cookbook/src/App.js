@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import Signup from './component/Signup';
-import Login from './component/Login'
+import Signup from "./component/Signup";
+import Login from "./component/Login";
+import Dashboard from './component/Dashboard'
 import backgroundimage from "./images/fresh-ingredients-cooking-pasta-wooden-background.jpg";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
         </div>
+        <Route path="/" exact component={Dashboard} />
       </BrowserRouter>
     </div>
   );
