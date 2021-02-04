@@ -1,18 +1,16 @@
 import React, { useRef, useState } from "react";
 import { Button, Card, Form, Alert, Container } from "react-bootstrap";
-import { useHistory,Link } from "react-router-dom";
 
+import { Link, useHistory } from "react-router-dom";
 
-export default function Signup() {
-  const nameRef = useRef();
+const Login = () => {
   const emailRef = useRef();
   const passRef = useRef();
-  const confirmPassRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   };
   return (
@@ -28,7 +26,7 @@ export default function Signup() {
           }}
         >
           <Card.Body>
-            <h2 className="text-center mb-4">Sign Up</h2>
+            <h2 className="text-center mb-4">Log In</h2>
             {error ? (
               <Alert variant="danger">
                 {JSON.stringify(error).replace(/\"/g, "")}
@@ -38,10 +36,6 @@ export default function Signup() {
             )}
 
             <Form onSubmit={handleSubmit}>
-              <Form.Group id="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control ref={nameRef} type="text" required />
-              </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control ref={emailRef} type="email" required />
@@ -50,20 +44,18 @@ export default function Signup() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control ref={passRef} type="password" required />
               </Form.Group>
-              <Form.Group id="confirm-password">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control ref={confirmPassRef} type="password" required />
-              </Form.Group>
               <Button disabled={loading} className="w-100" type="submit">
-                Sign Up
+                Log In
               </Button>
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2" style={{color:'white'}}>
-          Already Have an Account? <Link to="/login">Log In!</Link>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}>
+          Don't Have an Account?<Link to="/signup"> Create New Account!</Link>
         </div>
       </div>
     </Container>
   );
-}
+};
+
+export default Login;
