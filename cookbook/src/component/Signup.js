@@ -9,9 +9,11 @@ const inputStyle = {
   fontSize: "14px",
   padding: " 0 30px",
   height: "50px",
-  width: "100%",
+  width: "80%",
+  backgroundColor: "white",
   borderRadius: "30px",
   outline: 0,
+  marginTop: "20px",
 };
 
 export default function Signup() {
