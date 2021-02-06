@@ -8,10 +8,11 @@ const inputStyle = {
   fontSize: "14px",
   padding: " 0 30px",
   height: "50px",
-  width: "100%",
+  width: "80%",
+  backgroundColor: "white",
   borderRadius: "30px",
   outline: 0,
-  marginTop:"20px"
+  marginTop: "20px",
 };
 
 
@@ -42,7 +43,7 @@ const Login = () => {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card
           style={{
-            backgroundColor: " rgba(255,255,255, 0.5)",
+            backgroundColor: " rgba(255,255,255, 0.6)",
             color: "black",
           }}
         >
