@@ -11,7 +11,7 @@ export default function HomeFooter() {
                             </div>
               </div>
               <div className='col s4' style={{backgroundColor:"goldenrod",height:200}}>
-                            <Link to="/signup"><h1 style={{fontSize:40, textAlign:"center", marginTop:50, color:"black"}}><b>Sign Up <br></br> Now !</b></h1></Link>
+                            <Link to="/signup" style={{textDecoration:'none'}}><h1 style={{fontSize:40, textAlign:"center", marginTop:50, color:"black"}}><b>Sign Up <br></br> Now !</b></h1></Link>
               </div>
               <div className='col s4' style={{backgroundColor:"black",height:200, textAlign:"center",color:"whitesmoke"}}>
                             <i className="material-icons" style={{fontSize:120, marginTop:40}}>local_dining</i>
