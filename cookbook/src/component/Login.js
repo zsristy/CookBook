@@ -3,6 +3,18 @@ import { Button, Card, Form, Alert, Container } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
+const inputStyle = {
+  border: "1px solid #bfbfbf",
+  fontSize: "14px",
+  padding: " 0 30px",
+  height: "50px",
+  width: "100%",
+  borderRadius: "30px",
+  outline: 0,
+  marginTop:"20px"
+};
+
+
 const Login = () => {
   const emailRef = useRef();
   const passRef = useRef();
@@ -30,7 +42,7 @@ const Login = () => {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card
           style={{
-            backgroundColor: " rgba(255,255,255, 0.6)",
+            backgroundColor: " rgba(255,255,255, 0.5)",
             color: "black",
           }}
         >
@@ -46,14 +58,29 @@ const Login = () => {
 
             <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control ref={emailRef} type="email" required />
+                <Form.Control
+                  placeholder="Email"
+                  style={inputStyle}
+                  ref={emailRef}
+                  type="email"
+                  required
+                />
               </Form.Group>
               <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control ref={passRef} type="password" required />
+                <Form.Control
+                  placeholder="Password"
+                  style={inputStyle}
+                  ref={passRef}
+                  type="password"
+                  required
+                />
               </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit">
+              <Button
+                disabled={loading}
+                variant="success"
+                className="w-100"
+                type="submit"
+              >
                 Log In
               </Button>
             </Form>
