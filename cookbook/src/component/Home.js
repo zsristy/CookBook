@@ -42,15 +42,15 @@ export default function Home() {
                 backgroundImage: "url(" + backgroundimage1 + ")",
               }}>
               <div style={{backgroundColor:"whitesmoke", opacity:.6, height:380}}>
-                            <h1 style={{color:'black',marginLeft:600}}><i ><br></br>Let's Share Recipe<br></br> &ensp;&ensp;&ensp;&ensp; Let's Share Food</i></h1>
-                            <i className="material-icons" style={{marginLeft:650,fontSize:200}}>local_dining</i>
+                            <h1 style={{color:'black',marginLeft:'38%'}}><i ><br></br>Let's Share Recipe<br></br> &ensp;&ensp;&ensp;&ensp; Let's Share Food</i></h1>
+                            <i className="material-icons" style={{marginLeft:'43%',fontSize:200}}>local_dining</i>
               </div>
       </div>
       <div className="row" style={{marginTop:100, marginBottom:100, width:'100%'}}>
               <div className='col s6'>
                             <div className="row" style={{position:"relative", left:0, top:0}}>
-                            <img style={{height:330,width:510,position:"relative", left:0, top:0}} src={image1}></img>
-                            <img style={{height:330,width:330,position:"absolute", left:340, top:200}} src={image2}></img>
+                            <img style={{height:300,width:480,position:"relative", left:0, top:0}} src={image1}></img>
+                            <img style={{height:300,width:300,position:"absolute", left:340, top:200}} src={image2}></img>
                             </div>
               </div>
               <div className='col s6'
@@ -78,12 +78,12 @@ export default function Home() {
                 <b><i>Our Recipes</i></b>
               </div>                
               <div className='col s9'>
-                <div className='row' style={{position:"relative", left:0, top:0,marginLeft:40}}>
+                <div className='row' style={{position:"relative", left:0, top:0,marginLeft:60}}>
                             {photos.map((image)=>{
                             return(
                               <img style={{
-                              height:330,
-                              width:330,
+                              height:300,
+                              width:300,
                               margin:1}} 
                               onMouseOver={myMouseOver} 
                               onMouseOut={myMouseOut}                              
