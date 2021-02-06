@@ -1,19 +1,42 @@
 import React, { useRef, useState } from "react";
 import { Button, Card, Form, Alert, Container } from "react-bootstrap";
-import { useHistory,Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
+
+const inputStyle = {
+  border: "1px solid #bfbfbf",
+  fontSize: "14px",
+  padding: " 0 30px",
+  height: "50px",
+  width: "100%",
+  borderRadius: "30px",
+  outline: 0,
+};
 
 export default function Signup() {
   const nameRef = useRef();
   const emailRef = useRef();
   const passRef = useRef();
+  const { signup } = useAuth();
   const confirmPassRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (passRef.current.value !== confirmPassRef.current.value) {
+      return setError("Password do not match");
+    }
+    try {
+      setLoading(true);
+      await signup(emailRef.current.value, passRef.current.value);
+      history.push("/");
+    } catch (error) {
+      setError(error);
+    }
+    setLoading(false);
   };
   return (
     <Container
@@ -23,7 +46,7 @@ export default function Signup() {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card
           style={{
-            backgroundColor: " rgba(222,184,135, 0.8)",
+            backgroundColor: " rgba(255,255,255, 0.6)",
             color: "black",
           }}
         >
@@ -39,28 +62,53 @@ export default function Signup() {
 
             <Form onSubmit={handleSubmit}>
               <Form.Group id="name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control ref={nameRef} type="text" required />
+                <Form.Control
+                  placeholder="User Name"
+                  style={inputStyle}
+                  ref={nameRef}
+                  type="text"
+                  required
+                />
               </Form.Group>
               <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control ref={emailRef} type="email" required />
+                <Form.Control
+                  placeholder="Email"
+                  style={inputStyle}
+                  ref={emailRef}
+                  type="email"
+                  required
+                />
               </Form.Group>
               <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control ref={passRef} type="password" required />
+                <Form.Control
+                  placeholder="Password"
+                  style={inputStyle}
+                  ref={passRef}
+                  type="password"
+                  required
+                />
               </Form.Group>
               <Form.Group id="confirm-password">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control ref={confirmPassRef} type="password" required />
+                <Form.Control
+                  placeholder="Confirm Password"
+                  style={inputStyle}
+                  ref={confirmPassRef}
+                  type="password"
+                  required
+                />
               </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit">
+              <Button
+                disabled={loading}
+                variant="success"
+                className="w-100"
+                type="submit"
+              >
                 Sign Up
               </Button>
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2" style={{color:'white'}}>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}>
           Already Have an Account? <Link to="/login">Log In!</Link>
         </div>
       </div>
