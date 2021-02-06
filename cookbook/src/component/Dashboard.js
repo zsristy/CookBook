@@ -7,11 +7,12 @@ import dashboad_back from "../images/dashboad_back.jpg";
 
 export default function Dashboard() {
   const { currentUser, logout } = useAuth();
+  const [Error,setError]=useState({});
   const history = useHistory();
   const handleLogout = async () => {
     try {
       await logout().then(() => {
-        history.push("/login");
+        history.push("/home");
       });
     } catch (error) {
       setError(error);
