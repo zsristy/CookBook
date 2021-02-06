@@ -3,8 +3,8 @@ import image3 from "../images/fusion-food.jpg"
 import {Link} from 'react-router-dom';
 
 export default function HomeFooter() {
-    return <div style={{width:'99%'}}>
-    <div className='row' style={{marginTop:100, marginBottom:100}}>
+    return <div style={{width:'100%'}}>
+    <div className='row' style={{marginTop:100, marginBottom:100, marginLeft:0, marginRight:0}}>
               <div className='col s3' >
                             <div className="row" style={{position:"relative", left:0, top:0}}>
                             <img style={{height:200,position:"relative", left:0, top:0}} src={image3}></img>
