@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DashboardHeader from "./DashboardHeader";
 import dashboad_back from "../images/dashboad_back.jpg";
+import RecipeCard from "./RecipeCard";
+import { Container, Row } from "react-bootstrap";
 
 export default function Dashboard() {
   const { currentUser, logout } = useAuth();
@@ -23,6 +24,7 @@ export default function Dashboard() {
       <div
         style={{
           backgroundSize: "cover",
+          zIndex: -1,
           position: "fixed",
           height: "100%",
           width: "100%",
@@ -36,7 +38,7 @@ export default function Dashboard() {
           style={{
             position: "fixed",
             boxSizing: "border-box",
-            width: "1349px",
+            width: "100%",
             paddingLeft: "40px",
             paddingRight: "40px",
             display: "block",
@@ -49,15 +51,14 @@ export default function Dashboard() {
               fontSize: " 40px",
               lineHeight: " 40px",
               textAlign: "left",
-              fontFamily: "Cherry Swash",
-              fontWeight: "700",
+              fontWeight: "3",
               fontStyle: "normal",
             }}
           >
             It is even better than
             <br /> an expensive cookery book
           </h1>
-          <div className="firstSearch" style={{ marginTop: 40 }}>
+          <div style={{ marginTop: 40, position: "relative" }}>
             <form
               style={{
                 width: "40%",
@@ -65,7 +66,7 @@ export default function Dashboard() {
                 borderRadius: "25px",
               }}
             >
-              <div className="row" style={{ margin: 0 }}>
+              <Row style={{ margin: 0 }}>
                 <input
                   type="text"
                   className="col-md-9"
@@ -96,9 +97,43 @@ export default function Dashboard() {
                     search
                   </i>
                 </button>
-              </div>
+              </Row>
             </form>
           </div>
+        </div>
+      </div>
+      <div
+        style={{
+          top: "550px",
+          position: "absolute",
+          backgroundColor: "white",
+          width: "100%",
+        }}
+      >
+        <div>
+          <h3
+            style={{
+              textAlign: "center",
+              marginTop: 50,
+              marginBottom: 50,
+              fontSize: 50,
+              fontWeight: 3,
+            }}
+          >
+            Recipes By Search
+          </h3>
+
+          <Container>
+            <Row>
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+            </Row>
+          </Container>
         </div>
       </div>
     </div>
