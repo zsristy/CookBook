@@ -8,18 +8,15 @@ const edamamRecipe = axios.create({
   },
 });
 
-const getRecipe = async (searchTitle) => {
-    
+const getRecipe = async (searchTitle, setRecipeList) => {
   await edamamRecipe
     .get("/search", { params: { q: searchTitle } })
     .then((response) => {
-      return response.data;
+      setRecipeList(response.data);
     })
     .catch((error) => {
       console.log(error);
     });
-
-    
 };
 
 export { getRecipe };

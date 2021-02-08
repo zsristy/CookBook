@@ -22,10 +22,8 @@ export default function Dashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const item = await getRecipe(searchTitle);
-    if (item !== undefined) {
-      console.log(item);
-    }
+    await getRecipe(searchTitle, setRecipeList);
+    
   };
 
   const handleLogout = async () => {
