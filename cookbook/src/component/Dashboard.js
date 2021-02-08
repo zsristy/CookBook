@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import DashboardHeader from "./DashboardHeader";
 import dashboad_back from "../images/dashboad_back.jpg";
 import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
+import { getRecipe } from "../api/edamam";
+import SimpleSearch from "./SimpleSearch";
 
 export default function Dashboard() {
-  const { currentUser, logout } = useAuth();
+  const { logout } = useAuth();
   const [Error, setError] = useState("");
   const history = useHistory();
+
+  const [searchTitle, setSearchTitle] = useState("");
+  const [recipeList, setRecipeList] = useState({});
+
+  const handleChange = (e) => {
+    setSearchTitle(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const item = await getRecipe(searchTitle);
+    if (item !== undefined) {
+      console.log(item);
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await logout().then(() => {
@@ -19,6 +37,7 @@ export default function Dashboard() {
       setError(error);
     }
   };
+
   return (
     <div>
       <div
@@ -58,48 +77,10 @@ export default function Dashboard() {
             It is even better than
             <br /> an expensive cookery book
           </h1>
-          <div style={{ marginTop: 40, position: "relative" }}>
-            <form
-              style={{
-                width: "40%",
-                border: "2px solid white",
-                borderRadius: "25px",
-              }}
-            >
-              <Row style={{ margin: 0 }}>
-                <input
-                  type="text"
-                  className="col-md-9"
-                  placeholder="I want to make..."
-                  required
-                  style={{
-                    paddingLeft: "30px",
-                    color: "white",
-                    fontWeight: "10px",
-                    border: "#ffffff00",
-                    margin: 0,
-                    boxShadow: "none",
-                  }}
-                />
-                <button
-                  type="submit"
-                  className="col-md-2"
-                  style={{
-                    paddingTop: "5px",
-                    backgroundColor: "#ffffff00",
-                    border: "0px",
-                  }}
-                >
-                  <i
-                    className="material-icons"
-                    style={{ color: "white", fontSize: "30px" }}
-                  >
-                    search
-                  </i>
-                </button>
-              </Row>
-            </form>
-          </div>
+          <SimpleSearch
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
       <div
