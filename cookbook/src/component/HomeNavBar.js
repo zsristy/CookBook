@@ -1,19 +1,24 @@
 import React from "react";
-import { Navbar, Nav} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function HomeNavBar() {
   return (
     <Navbar
-      style={{ backgroundColor: "black", outline: "none", position:"sticky"}}
+      style={{ backgroundColor: "black", outline: "none", position: "sticky" }}
       variant="dark"
     >
-      <Navbar.Brand style={{fontSize:30}}>CookBook</Navbar.Brand>
+      <Navbar.Brand style={{ fontSize: 30 }}>CookBook</Navbar.Brand>
       <Navbar.Collapse id="basic-navbar-nav">
-         <Nav className="ml-auto" style={{alignItems:'right'}}>
-        <Nav.Link href="#home">About Us</Nav.Link>
-        <Nav.Link href="#features">Sign Up</Nav.Link>
-      </Nav> 
-      </Navbar.Collapse> 
+        <Nav className="ml-auto">
+          <Nav.Item style={{ margin: 10 }}>About Us</Nav.Item>
+          <Nav.Item style={{ margin: 10 }}>
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              Sign Up
+            </Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   );
 }
