@@ -1,11 +1,11 @@
 import React from "react";
 import {Col, Card } from "react-bootstrap";
-import drinks from "../images/drinks.jpg";
+import drinks from "../images/foodiesfeed.com_pouring-honey-on-pancakes-with-walnuts.jpg";
 
 function RecipeCard() {
   return (
     <Col sm={4}>
-      <Card border="success">
+      <Card border="success" style={{borderRadius:20,overflow:'hidden'}}>
         <Card.Img variant="top" src={drinks} />
         <Card.Body>
           <Card.Title>Card title</Card.Title>
