@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Signup from "./component/Signup";
+import AdvanceSearch from "./component/AdvanceSearch";
 import Login from "./component/Login";
 import Home from "./component/Home";
 import Dashboard from "./component/Dashboard";
@@ -23,8 +24,10 @@ function App() {
         >
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/search" exact component={AdvanceSearch} />
         </div>
         <PrivateRoute path="/" exact component={Dashboard} />
+        
       </BrowserRouter>
     </div>
   );
