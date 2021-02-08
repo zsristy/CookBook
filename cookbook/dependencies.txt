@@ -2,3 +2,4 @@ npm install bootstrap
 npm install react-bootstrap
 npm install react-router-dom
 npm install firebase
+npm install semantic-ui-react semantic-ui-css
