@@ -114,7 +114,7 @@ export default function AdvanceSearch() {
           
           <div className='col s5' >
 
-          <h4 style={{color:"white", opacity:.5,paddingLeft:'12%'}}>Try an Advanced Search by mentioning your<br></br> Meal type and Cuisine.</h4>
+          <h4 style={{color:"white", opacity:.5,paddingLeft:'12%'}}>Try an Advanced Search by mentioning your Meal type and Cuisine.</h4>
                     <div className="col s11" style={{paddingLeft:"10%",paddingTop:'5%'}}>
                       <div className="search"
                         style={{
