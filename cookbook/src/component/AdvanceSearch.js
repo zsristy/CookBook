@@ -3,7 +3,8 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import kiwi from "../images/bread.jpg";
 import DashboardHeader from "./DashboardHeader";
-
+import RecipeCard from "./RecipeCard";
+import { Container, Row } from "react-bootstrap";
 
 
 
@@ -163,7 +164,7 @@ export default function AdvanceSearch() {
                             <div className='row'>
                                   <div className='col s12'>
                                         <div className='col s3'>
-                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"20%"}}> Meal </label>
+                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"35%"}}> Meal </label>
                                         </div>
                                         <div className='col s9'>
                                               <Select
@@ -183,7 +184,7 @@ export default function AdvanceSearch() {
                             <div className='row'>
                                   <div className='col s12'>
                                         <div className='col s3'>
-                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"20%"}}> Cuisine </label>
+                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"35%"}}> Cuisine </label>
                                         </div>
                                         <div className='col s9'>
                                               <Select
@@ -270,6 +271,40 @@ export default function AdvanceSearch() {
           
           </form>      
         </div>
+        <div
+        style={{
+          top: "500px",
+          position: "absolute",
+          backgroundColor: "white",
+          width: "100%",
+        }}
+      >
+        <div>
+          <h3
+            style={{
+              textAlign: "center",
+              marginTop: 50,
+              marginBottom: 50,
+              fontSize: 50,
+              fontWeight: 3,
+            }}
+          >
+            Recipes By Search
+          </h3>
+
+          <Container>
+            <Row>
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+              <RecipeCard />
+            </Row>
+          </Container>
+        </div>
+      </div>
         
     </div>
   );
