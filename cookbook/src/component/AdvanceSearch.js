@@ -5,51 +5,14 @@ import kiwi from "../images/bread.jpg";
 import DashboardHeader from "./DashboardHeader";
 import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
+import Multiselect from "./multiselect";
+import Singleselect from "./singleselect"
 
 
 
 
 export default function AdvanceSearch() {
-  const animatedComponents = makeAnimated();
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "white",
-      opacity:'.7',
-      borderColor: 'white',
-      borderRadius:"25px",
-      minHeight: '50px',
-      height: '50px',
-      boxShadow: state.isFocused ? null : null,
-    }),
-
-    valueContainer: (provided, state) => ({
-      ...provided,
-      height: '50px',
-      paddingLeft:"15px",
-    }),
-
-    input: (provided, state) => ({
-      ...provided,
-      margin: '0px',
-    }),
-    indicatorsContainer: (provided, state) => ({
-      ...provided,
-      height: '50px',
-    }),
-  };
-
-  const customStyles1 = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "white",
-      opacity:'.7',
-      borderColor: 'white',
-      borderRadius:"35px",
-      boxShadow: state.isFocused ? null : null,
-    })}
-
-
+  
     const mealoptions = [
     { value: 'Breakfast', label: 'Breakfast' },
     { value: 'Lunch', label: 'Lunch' },
@@ -161,43 +124,11 @@ export default function AdvanceSearch() {
 
                         
                       <div className="col s6" style={{paddingTop:15}}>
-                            <div className='row'>
-                                  <div className='col s12'>
-                                        <div className='col s3'>
-                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"35%"}}> Meal </label>
-                                        </div>
-                                        <div className='col s9'>
-                                              <Select
-                                                styles={customStyles}
-                                                placeholder="Meal"
-                                                isClearable
-                                                isSearchable
-                                                name="color"
-                                                options={mealoptions}
-                                                />
-                                        </div>
-                                    </div>
-                            </div>
+                      <Singleselect title="Meal" options={mealoptions} color="whitesmoke"></Singleselect>
                       </div>
             
                       <div className="col s6" style={{paddingTop:15}}>
-                            <div className='row'>
-                                  <div className='col s12'>
-                                        <div className='col s3'>
-                                        <label style={{fontSize:16,color:"whitesmoke",paddingTop:"35%"}}> Cuisine </label>
-                                        </div>
-                                        <div className='col s9'>
-                                              <Select
-                                                styles={customStyles}
-                                                placeholder="Cuisine"
-                                                isClearable
-                                                isSearchable
-                                                name="color"
-                                                options={cuisineoptions}
-                                                />
-                                          </div>
-                                  </div>
-                            </div>
+                      <Singleselect title="Cuisine" options={cuisineoptions} color="whitesmoke"></Singleselect>
                       </div>
 
           </div>
@@ -208,61 +139,8 @@ export default function AdvanceSearch() {
           borderColor:"white",
           }}>
           <p style={{color:"white", opacity:.5,paddingLeft:'12%',fontSize:"16",paddingBottom:"2%"}}>If you want to go for specific diet and avoid some specific item then this filter will help you.</p>
-          {/* <div className="row">
-          <div className='col s12'>
-                                        <div className='col s2'></div>
-                                        <div className='col s2'>
-                                        <label style={{fontSize:16,color:"whitesmoke"}}> Calorie range </label>
-                                        </div>
-                                        <div className='col s4'>
-                                              <Select
-                                                styles={customStyles}
-                                                placeholder="Cuisine"
-                                                isClearable
-                                                isSearchable
-                                                name="color"
-                                                options={options}
-                                                />
-                                          </div>
-                                  </div>
-          </div> */}
-                <div className="row">
-                      <div className="col s12">
-                              <div className="col s1" >
-                              <label style={{fontSize:16,color:"whitesmoke",paddingTop:"50%"}}> Diet</label>
-                              </div>
-                              <div className="col s11">
-                              <Select
-                              styles={customStyles1}
-                              placeholder="Diet"
-                              closeMenuOnSelect={false}
-                              components={animatedComponents}
-                              isMulti
-                              name="color"
-                              options={dietoptions}
-                              />
-                              </div>
-                      </div>
-                </div>
-
-                <div className="row">
-                      <div className="col s12">
-                              <div className="col s1" >
-                              <label style={{fontSize:16,color:"whitesmoke",paddingTop:"50%"}}> Health</label>
-                              </div>
-                              <div className="col s11">
-                              <Select
-                              styles={customStyles1}
-                              placeholder="Health"
-                              closeMenuOnSelect={false}
-                              components={animatedComponents}
-                              isMulti
-                              name="color"
-                              options={avoidoptions}
-                              />
-                              </div>
-                      </div>
-                </div>
+                <Multiselect title="Diet" options={dietoptions} color="whitesmoke"></Multiselect>
+                <Multiselect title="Health" options={avoidoptions} color="whitesmoke"></Multiselect>                
           </div>
 
           

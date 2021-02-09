@@ -1,52 +1,26 @@
-import React from "react";
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import React,{useEffect,useRef} from "react";
+import Singleselect from "./singleselect"
+import Multiselect from "./multiselect";
 import nutsteak from "../images/nut-steak.jpg";
 import DashboardHeader from "./DashboardHeader";
-
+import autosize from "autosize";
 
 
 
 
 export default function AddRecipies() {
-  const animatedComponents = makeAnimated();
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "white",
-      opacity:'.7',
-      borderColor: 'white',
-      borderRadius:"25px",
-      minHeight: '50px',
-      height: '50px',
-      boxShadow: state.isFocused ? null : null,
-    }),
-
-    valueContainer: (provided, state) => ({
-      ...provided,
-      height: '50px',
-      paddingLeft:"15px",
-    }),
-
-    input: (provided, state) => ({
-      ...provided,
-      margin: '0px',
-    }),
-    indicatorsContainer: (provided, state) => ({
-      ...provided,
-      height: '50px',
-    }),
-  };
-
-  const customStyles1 = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "white",
-      opacity:'.7',
-      borderColor: 'white',
-      borderRadius:"35px",
-      boxShadow: state.isFocused ? null : null,
-    })}
+    const textarea=useRef();
+    const style1 = {
+        outline:"none",
+        overflow:"auto",
+        overflow:"hidden",
+        minHeight: "200px",
+        padding: "9px",
+        boxSizing: "none",
+        borderColor:"white",
+        fontSize: "16px",
+        backgroundColor:"white",
+      };
 
 
     const mealoptions = [
@@ -93,8 +67,31 @@ export default function AddRecipies() {
                 { value: 'vegetarian', label: 'Vegetarian' },
                   ]
 
+                  const uploadedImage = React.useRef(null);
+                  const imageUploader = React.useRef(null);
+                
+                  const handleImageUpload = e => {
+                    const [file] = e.target.files;
+                    if (file) {
+                      const reader = new FileReader();
+                      const { current } = uploadedImage;
+                      current.file = file;
+                      reader.onload = e => {
+                        current.src = e.target.result;
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  };
+                  useEffect(() => {
+                    textarea.current.focus();
+                    autosize(textarea.current);
+                  });
+
     
   return (
+
+
+
     <div>
         <div
         style={{ 
@@ -123,24 +120,141 @@ export default function AddRecipies() {
 
           
         </div>
-        
+        <div>
          <div
          style={{
             top: "450px",
             position: "absolute",
-             height:1000,
-             width:"80%",
-             marginLeft:"10%",
-             background:"whitesmoke",
-            opacity:.9,
+            width:"86%",
+            marginLeft:"7%",
+            paddingBottom:50,
             justifyContent:"center",
              
          }}
          >
              <form
-             >
+             style={{background:"whitesmoke",
+             opacity:.8,
+             borderRadius:30,
+             paddingTop:50}}
+             > 
+             <p style={{color:"goldenrod",fontSize:30,paddingLeft:"35%"}}>Please write the full recipe here</p>
+             <div className="row" style={{padding:100,paddingBottom:0,paddingTop:50}}>
+             
+                 <div className="col s12">                 
+                    <div className="col s5"
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}
+                    >
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        ref={imageUploader}
+                        style={{
+                        display: "none",
+                        }}
+                    />
+                    <div
+                        style={{
+                        height: "320px",
+                        width: "100%",
+                        border: "solid",
+                        borderColor:"goldenrod",
+                        backgroundColor:"white",
+                        }}
+                        onClick={() => imageUploader.current.click()}
+                    >
+                        <img
+                        ref={uploadedImage}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            position: "acsolute"
+                        }}
+                        />
+                    </div>
+                    Click to upload Image
+                    </div>
+                    <div className="col s7">
+                        <div className="row">
+                        <div className="col s12">
+                        <div className="col s1">
+                        <label style={{fontSize:16,color:"black",paddingTop:"15%",paddingLeft:"35%"}}> Recipie</label>
+                        </div>
+                        <div className="col s11" style={{paddingLeft:"7%",paddingRight:"7%"}}>
+                        <input
+            type="text"
+            placeholder="Recipie Name"
+            required
+            style={{
+              paddingLeft: "20px",
+              backgroundColor: "white",
+              fontWeight: "10px",
+              border: "white",
+              boxShadow: "none",
+              borderRadius:"20px"
+            }}
+          />
+                        </div>
+                        </div>
+                        </div>
+                        <div className="row">
+                        <div className="col s12">
+                        <div className="col s6">
+                        <Singleselect title="Meal" options={mealoptions} color="black"></Singleselect>
+                        </div>
+                        <div className="col s6">
+                        <Singleselect title="Cuisine" options={cuisineoptions} color="black"></Singleselect>
+                        </div>
+                        </div>
+                        </div>
+                        <div className="col s12">
+                        <Multiselect title="Diet" options={dietoptions} color="black"></Multiselect>
+                        <Multiselect title="Health" options={avoidoptions} color="black"></Multiselect>
+                        </div>
+                    </div>
+                    </div>
+             </div>
+                    <div className="row" style={{padding:100,paddingTop:0}}>
+                        <div className="col s12">
+                        <div className="col s5">
+                        
+                        <p style={{color:"goldenrod",fontWeight:"bold",fontSize:20}}>Ingredients</p>
+                        
+                        <textarea
+                        required
+                        style={style1}
+                        ref={textarea}
+                        placeholder="type some text"
+                        rows={1}
+                        defaultValue=""
+                        />
+                        </div>
+
+                        <div className="col s7">
+                        
+                        <p style={{color:"goldenrod",fontWeight:"bold",fontSize:20}}>Preparation</p>
+                        
+                        <textarea
+                        required
+                        style={style1}
+                        ref={textarea}
+                        placeholder="type some text"
+                        rows={1}
+                        defaultValue=""
+                        />
+                        </div>
+                    </div>
+                    </div>
+                    
 
              </form>
+        </div>
         </div>
         
     </div>
