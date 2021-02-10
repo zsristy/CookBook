@@ -12,7 +12,7 @@ const getRecipe = async (searchTitle, setRecipeList) => {
   await edamamRecipe
     .get("/search", { params: { q: searchTitle } })
     .then((response) => {
-      setRecipeList(response.data);
+      setRecipeList(response.data.hits);
     })
     .catch((error) => {
       console.log(error);
