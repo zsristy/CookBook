@@ -103,14 +103,11 @@ export default function Dashboard() {
 
           <Container>
             <Row>
-              
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
+              {Array.isArray(recipeList)
+                ? recipeList.map((recipe, i) => {
+                    return <RecipeCard singleRecipe={recipe} key={i} />;
+                  })
+                : ""}
             </Row>
           </Container>
         </div>
