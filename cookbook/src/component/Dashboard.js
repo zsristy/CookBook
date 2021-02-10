@@ -14,7 +14,7 @@ export default function Dashboard() {
   const history = useHistory();
 
   const [searchTitle, setSearchTitle] = useState("");
-  const [recipeList, setRecipeList] = useState({});
+  const [recipeList, setRecipeList] = useState([]);
 
   const handleChange = (e) => {
     setSearchTitle(e.target.value);
@@ -34,8 +34,6 @@ export default function Dashboard() {
       setError(error);
     }
   };
-
-  console.log(recipeList);
 
   return (
     <div>
@@ -105,6 +103,7 @@ export default function Dashboard() {
 
           <Container>
             <Row>
+              
               <RecipeCard />
               <RecipeCard />
               <RecipeCard />

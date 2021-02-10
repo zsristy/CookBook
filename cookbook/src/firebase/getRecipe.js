@@ -7,11 +7,13 @@ const getRecipe = async (searchTitle, setRecipeList) => {
     console.log("No matching documents.");
     return;
   }
-  const recipeList = {};
+  const recipeList = [];
   snapshot.forEach((doc) => {
     const RecipeLable = doc.data().recipe.label.toLowerCase();
     if (RecipeLable.includes(searchTitle)) {
-      recipeList[doc.id] = doc.data();
+      const data = doc.data();
+      data["recipeId"] = doc.id;
+      recipeList.push(data);
     }
   });
   setRecipeList(recipeList);
