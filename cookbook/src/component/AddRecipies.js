@@ -1,4 +1,4 @@
-import React,{useEffect,useRef} from "react";
+import React,{useEffect,useRef,useState} from "react";
 import Singleselect from "./singleselect"
 import Multiselect from "./multiselect";
 import nutsteak from "../images/nut-steak.jpg";
@@ -67,10 +67,10 @@ export default function AddRecipies() {
                 { value: 'vegetarian', label: 'Vegetarian' },
                   ]
 
-                  const uploadedImage = React.useRef(null);
-                  const imageUploader = React.useRef(null);
+                  const uploadedImage = useRef(null);
+                  const imageUploader = useRef(null);
                 
-                  const handleImageUpload = e => {
+                  const handleImageUpload = (e) => {
                     const [file] = e.target.files;
                     if (file) {
                       const reader = new FileReader();
@@ -83,9 +83,31 @@ export default function AddRecipies() {
                     }
                   };
                   useEffect(() => {
-                    textarea.current.focus();
                     autosize(textarea.current);
                   });
+
+                const [state,setState] =useState({
+                    rows: [{}]
+                  }
+                )
+              
+                const handleAddRow = () => {
+                  setState((prevState, props) => {
+                    const row = { name: "", amount: ""};
+                    return { rows: [...prevState.rows, row] };
+                  });
+                };
+              
+                const handleRemoveRow = () => {
+                  setState((prevState, props) => {
+                    return { rows: prevState.rows.slice(1) };
+                  });
+                };
+
+                const styles = {
+                    fontFamily: "sans-serif",
+                    textAlign: "left"
+                  };
 
     
   return (
@@ -190,7 +212,7 @@ export default function AddRecipies() {
                         <input
             type="text"
             placeholder="Recipie Name"
-            required
+            //required
             style={{
               paddingLeft: "20px",
               backgroundColor: "white",
@@ -225,23 +247,58 @@ export default function AddRecipies() {
                         <div className="col s5">
                         
                         <p style={{color:"goldenrod",fontWeight:"bold",fontSize:20}}>Ingredients</p>
-                        
-                        <textarea
-                        required
-                        style={style1}
-                        ref={textarea}
-                        placeholder="type some text"
-                        rows={1}
-                        defaultValue=""
+
+    <div style={styles}>
+        <table>
+        <thead>
+                  <tr>
+                    <th className="text-center"> # </th>
+                    <th className="text-center"> Name </th>
+                    <th className="text-center"> Amount </th>
+                    <th />
+                  </tr>
+        </thead>
+          <tbody>
+          {state.rows.map((row, idx) => (
+                    <tr id="addr0" key={idx}>
+                      <td>{idx}</td>
+                      <td>
+                        <input
+                          type="text"
+                          name="name"
+                          style={{outline:"none",boxShadow: "none"}}
                         />
-                        </div>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="amount"
+                          style={{outline:"none",boxShadow: "none"}}
+                        />
+                      </td>
+                      </tr>
+            ))}
+            <tr>
+              <td onClick={handleAddRow} >
+              <i className="material-icons"style={{cursor:"pointer"}}>add_circle_outline</i>
+              </td>
+              {Boolean(state.rows.length) && (
+                <td onClick={handleRemoveRow}>
+                <i className="material-icons"style={{cursor:"pointer"}}>remove_circle_outline</i>
+                </td>
+              )}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+                        </div> 
 
                         <div className="col s7">
                         
                         <p style={{color:"goldenrod",fontWeight:"bold",fontSize:20}}>Preparation</p>
                         
                         <textarea
-                        required
+                        //required
                         style={style1}
                         ref={textarea}
                         placeholder="type some text"
