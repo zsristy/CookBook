@@ -5,7 +5,7 @@ import DashboardHeader from "./DashboardHeader";
 import dashboad_back from "../images/dashboad_back.jpg";
 import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
-import { getRecipe } from "../api/edamam";
+import getRecipe from "../firebase/getRecipe";
 import SimpleSearch from "./SimpleSearch";
 
 export default function Dashboard() {
@@ -23,7 +23,6 @@ export default function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await getRecipe(searchTitle, setRecipeList);
-    
   };
 
   const handleLogout = async () => {
@@ -35,6 +34,8 @@ export default function Dashboard() {
       setError(error);
     }
   };
+
+  console.log(recipeList);
 
   return (
     <div>
