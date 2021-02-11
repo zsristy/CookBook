@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Signup from "./component/Signup";
 import AdvanceSearch from "./component/AdvanceSearch";
 import AddRecipies from "./component/AddRecipies";
+import SingleRecipie from "./component/SingleRecipie";
 import Login from "./component/Login";
 import Home from "./component/Home";
 import Dashboard from "./component/Dashboard";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/signup" exact component={Signup} />
           <Route path="/search" exact component={AdvanceSearch} />
           <Route path="/addrecipies" exact component={AddRecipies} />
+          <Route path="/singlerecipie" exact component={SingleRecipie} />
         </div>
         <PrivateRoute path="/" exact component={Dashboard} />
         

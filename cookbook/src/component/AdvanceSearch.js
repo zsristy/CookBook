@@ -124,11 +124,11 @@ export default function AdvanceSearch() {
 
                         
                       <div className="col s6" style={{paddingTop:15}}>
-                      <Singleselect title="Meal" options={mealoptions} color="whitesmoke"></Singleselect>
+                      <Singleselect title="Meal" options={mealoptions}></Singleselect>
                       </div>
             
                       <div className="col s6" style={{paddingTop:15}}>
-                      <Singleselect title="Cuisine" options={cuisineoptions} color="whitesmoke"></Singleselect>
+                      <Singleselect title="Cuisine" options={cuisineoptions}></Singleselect>
                       </div>
 
           </div>
@@ -139,8 +139,8 @@ export default function AdvanceSearch() {
           borderColor:"white",
           }}>
           <p style={{color:"white", opacity:.5,paddingLeft:'12%',fontSize:"16",paddingBottom:"2%"}}>If you want to go for specific diet and avoid some specific item then this filter will help you.</p>
-                <Multiselect title="Diet" options={dietoptions} color="whitesmoke"></Multiselect>
-                <Multiselect title="Health" options={avoidoptions} color="whitesmoke"></Multiselect>                
+                <Multiselect title="Diet" options={dietoptions}></Multiselect>
+                <Multiselect title="Health" options={avoidoptions}></Multiselect>                
           </div>
 
           

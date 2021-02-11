@@ -1,9 +1,10 @@
 import React,{useEffect,useRef,useState} from "react";
-import Singleselect from "./singleselect"
-import Multiselect from "./multiselect";
+import SingleInput from "./singleinput"
+import MultiInput from "./multiinput";
 import nutsteak from "../images/nut-steak.jpg";
 import DashboardHeader from "./DashboardHeader";
 import autosize from "autosize";
+import { Button } from 'semantic-ui-react'
 
 
 
@@ -156,11 +157,11 @@ export default function AddRecipies() {
          >
              <form
              style={{background:"whitesmoke",
-             opacity:.8,
+             opacity:.7,
              borderRadius:30,
-             paddingTop:50}}
+             paddingTop:35}}
              > 
-             <p style={{color:"goldenrod",fontSize:30,paddingLeft:"35%"}}>Please write the full recipe here</p>
+             <p style={{color:"goldenrod",fontSize:40,paddingLeft:"25%",fontWeight:"bold"}}>Please write the full recipe here</p>
              <div className="row" style={{padding:100,paddingBottom:0,paddingTop:50}}>
              
                  <div className="col s12">                 
@@ -228,16 +229,16 @@ export default function AddRecipies() {
                         <div className="row">
                         <div className="col s12">
                         <div className="col s6">
-                        <Singleselect title="Meal" options={mealoptions} color="black"></Singleselect>
+                        <SingleInput title="Meal" options={mealoptions} ></SingleInput>
                         </div>
                         <div className="col s6">
-                        <Singleselect title="Cuisine" options={cuisineoptions} color="black"></Singleselect>
+                        <SingleInput title="Cuisine" options={cuisineoptions} ></SingleInput>
                         </div>
                         </div>
                         </div>
                         <div className="col s12">
-                        <Multiselect title="Diet" options={dietoptions} color="black"></Multiselect>
-                        <Multiselect title="Health" options={avoidoptions} color="black"></Multiselect>
+                        <MultiInput title="Diet" options={dietoptions} ></MultiInput>
+                        <MultiInput title="Health" options={avoidoptions} ></MultiInput>
                         </div>
                     </div>
                     </div>
@@ -305,6 +306,9 @@ export default function AddRecipies() {
                         rows={1}
                         defaultValue=""
                         />
+                        <div style={{paddingTop:50,paddingLeft:"80%"}}>
+                        <Button >Add Recipie</Button>
+                        </div>
                         </div>
                     </div>
                     </div>
