@@ -5,7 +5,7 @@ import DashboardHeader from "./DashboardHeader";
 import dashboad_back from "../images/dashboad_back.jpg";
 import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
-import { getRecipe } from "../api/edamam";
+import getRecipe from "../firebase/getRecipe";
 import SimpleSearch from "./SimpleSearch";
 
 export default function Dashboard() {
@@ -14,7 +14,7 @@ export default function Dashboard() {
   const history = useHistory();
 
   const [searchTitle, setSearchTitle] = useState("");
-  const [recipeList, setRecipeList] = useState({});
+  const [recipeList, setRecipeList] = useState([]);
 
   const handleChange = (e) => {
     setSearchTitle(e.target.value);
@@ -23,7 +23,6 @@ export default function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await getRecipe(searchTitle, setRecipeList);
-    
   };
 
   const handleLogout = async () => {
@@ -104,13 +103,11 @@ export default function Dashboard() {
 
           <Container>
             <Row>
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
-              <RecipeCard />
+              {Array.isArray(recipeList)
+                ? recipeList.map((recipe, i) => {
+                    return <RecipeCard singleRecipe={recipe} key={i} />;
+                  })
+                : ""}
             </Row>
           </Container>
         </div>
