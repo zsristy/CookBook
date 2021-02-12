@@ -101,20 +101,23 @@ export default function SingleRecipie() {
              borderRadius:30,
              paddingTop:50}}
              > 
-     <div className="col s12 l6">
+     <div className="col s12">
         <div className="card-panel grey lighten-5 z-depth-1">
-          <div className="row valign-wrapper">
-            <div className="col s2">
-              <img src={kiwi} alt="" className="circle responsive-img"/> 
+          <div className="row">
+            <div className="col s12">
+            <div className="col s4">
+              <img src={kiwi} style={{width:100,height:100,borderRadius:"50%"}}/> 
             </div>
-            <div className="col s10">
+            <div className="col s8">
               <span className="black-text">
                 
               </span>
             </div>
+            </div>
           </div>
         </div>
       </div>
+      <p>hello</p>
              
              </div>  
          
