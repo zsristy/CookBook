@@ -3,6 +3,7 @@ import kiwi from "../images/kiwi.jpg";
 import gallery3 from "../images/gallery3.jpg";
 import DashboardHeader from "./DashboardHeader";
 import 'semantic-ui-css/semantic.min.css'
+import { Item,Table} from 'semantic-ui-react'
 import { Rating } from 'semantic-ui-react'
 import { Button, Icon } from 'semantic-ui-react'
 import { Label } from 'semantic-ui-react'
@@ -99,25 +100,35 @@ export default function SingleRecipie() {
              background:"whitesmoke",
              opacity:.8,
              borderRadius:30,
-             paddingTop:50}}
+             padding:40}}
              > 
-     <div className="col s12">
-        <div className="card-panel grey lighten-5 z-depth-1">
-          <div className="row">
-            <div className="col s12">
-            <div className="col s4">
-              <img src={kiwi} style={{width:100,height:100,borderRadius:"50%"}}/> 
-            </div>
-            <div className="col s8">
-              <span className="black-text">
-                
-              </span>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p>hello</p>
+             {/* profile card */}
+             <Item.Group>
+              <Item>
+              <img src={kiwi} alt style={{width:90,height:90,borderRadius:"50%"}}></img>
+              <Item.Content style={{paddingTop:40,paddingLeft:10}}>
+              <Item.Header >Chef</Item.Header>
+              </Item.Content>
+              </Item>
+              </Item.Group>
+              <b>Comments</b>
+
+
+              {/* comments */}
+              <div style={{maxHeight:300, overflowY:"scroll",marginTop:20}}>
+              <Item.Group divided>
+                <Item>
+                  <Item.Content>
+                    <Item.Meta>Description</Item.Meta>
+                    <Item.Description>
+                      hibijabi
+                    </Item.Description>
+                    <Item.Extra>Additional Details</Item.Extra>
+                  </Item.Content>
+                </Item>
+                </Item.Group>
+                              
+              </div>
              
              </div>  
          
@@ -137,13 +148,62 @@ export default function SingleRecipie() {
                       
                   }}
                   >
+                    {/* data from firebase */}
                       <form
                       style={{background:"whitesmoke",
                       opacity:.8,
                       borderRadius:30,
-                      paddingTop:50}}
+                      padding:50}}
                       > 
-                      River
+                      <Item.Group divided>
+                      <Item> 
+                        <img src={kiwi} alt style={{width:"45%",height:280}}></img>
+                        <Item.Content style={{paddingLeft:"5%"}}>
+                          <Item.Header ><h3 style={{color:"goldenrod"}}>Recipie name</h3></Item.Header>                         
+                          <Item.Extra>
+                            <Label>No suger</Label>
+                          </Item.Extra>
+                        </Item.Content>
+                      </Item>
+                      </Item.Group>
+                      <div className="row" style={{margin:0}}>
+                        <div className="col s12"style={{paddingTop:30,paddingBottom:30}}>
+                          <div className="col s6"style={{paddingRight:"5%"}}>
+                          <Table celled>
+                              <Table.Header>
+                                <Table.Row>
+                                  <Table.HeaderCell>
+                                    <Label ribbon style={{color:"goldenrod"}}><h4>Ingredients</h4></Label>
+                                    </Table.HeaderCell>
+                                </Table.Row>
+                              </Table.Header>
+
+                              <Table.Body>
+                                <Table.Row>
+                                  <Table.Cell>Cell</Table.Cell>
+                                </Table.Row>
+                              </Table.Body>
+                            </Table>
+                          </div>
+                           
+                          <div className="col s6">
+                          <Item.Group>
+                            <Item>
+                              <Item.Content>
+                                <Item.Header><h3 style={{color:"goldenrod"}}>Preparation</h3></Item.Header>
+                                <Item.Description>
+                                  <p>
+                                    Many people also have their own barometers for what makes a cute
+                                    dog.
+                                  </p>
+                                </Item.Description>
+                              </Item.Content>
+                            </Item>
+                            </Item.Group>
+                          </div>
+
+                        </div>
+                      </div>
                       </form>  
                   
          
