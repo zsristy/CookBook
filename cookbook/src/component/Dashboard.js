@@ -7,14 +7,17 @@ import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
 import getRecipe from "../firebase/getRecipe";
 import SimpleSearch from "./SimpleSearch";
+import { Pagination,Grid } from "semantic-ui-react";
 
 export default function Dashboard() {
   const { logout } = useAuth();
   const [Error, setError] = useState("");
   const history = useHistory();
-
+  const [activePage, setActivePage] = useState();
+  const [totalPage, setTotalPage] = useState();
   const [searchTitle, setSearchTitle] = useState("");
-  const [recipeList, setRecipeList] = useState([]);
+  const [recipeList, setRecipeList] = useState();
+  const [activeRecipe, setActiveRecipe] = useState();
 
   const handleChange = (e) => {
     setSearchTitle(e.target.value);
@@ -23,6 +26,29 @@ export default function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await getRecipe(searchTitle, setRecipeList);
+    if (recipeList !== undefined) {
+      setActivePage(1)
+      setTotalPage(Math.ceil(recipeList.length / 6));
+      setActiveRecipe(pagination(recipeList, 1, 6));
+    }
+  };
+
+  const handlePagechange = (e, { activePage }) => {
+    setActivePage(activePage);
+    setActiveRecipe(pagination(recipeList, activePage, 6));
+  };
+
+  const pagination = (array, index, size) => {
+    // transform values
+    index = Math.abs(parseInt(index));
+    index = index > 0 ? index - 1 : index;
+    size = parseInt(size);
+    size = size < 1 ? 1 : size;
+    return [
+      ...array.filter((value, n) => {
+        return n >= index * size && n < (index + 1) * size;
+      }),
+    ];
   };
 
   const handleLogout = async () => {
@@ -35,14 +61,15 @@ export default function Dashboard() {
     }
   };
 
+  console.log(totalPage);
+
   return (
     <div>
       <div
         style={{
           backgroundSize: "cover",
           zIndex: -1,
-          position: "fixed",
-          height: "100%",
+          height: "667px",
           width: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -52,7 +79,6 @@ export default function Dashboard() {
         <DashboardHeader handleLogout={handleLogout} />
         <div
           style={{
-            position: "fixed",
             boxSizing: "border-box",
             width: "100%",
             paddingLeft: "40px",
@@ -80,38 +106,50 @@ export default function Dashboard() {
           />
         </div>
       </div>
-      <div
-        style={{
-          top: "550px",
-          position: "absolute",
-          backgroundColor: "white",
-          width: "100%",
-        }}
-      >
-        <div>
-          <h3
-            style={{
-              textAlign: "center",
-              marginTop: 50,
-              marginBottom: 50,
-              fontSize: 50,
-              fontWeight: 3,
-            }}
-          >
-            Recipes By Search
-          </h3>
+      {Array.isArray(activeRecipe) ? (
+        <div
+          style={{
+            top: "550px",
+            position: "absolute",
+            backgroundColor: "white",
+            width: "100%",
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                textAlign: "center",
+                marginTop: 50,
+                marginBottom: 50,
+                fontSize: 50,
+                fontWeight: 3,
+              }}
+            >
+              Recipes By Search
+            </h3>
 
-          <Container>
-            <Row>
-              {Array.isArray(recipeList)
-                ? recipeList.map((recipe, i) => {
-                    return <RecipeCard singleRecipe={recipe} key={i} />;
-                  })
-                : ""}
-            </Row>
-          </Container>
+            <Container>
+              <Row>
+                {activeRecipe.map((recipe, i) => {
+                  return <RecipeCard singleRecipe={recipe} key={i} />;
+                })}
+              </Row>
+            </Container>
+            <Grid>
+              <Grid.Column textAlign="center">
+                <Pagination
+                  style={{ textAlign: "center" }}
+                  activePage={activePage}
+                  onPageChange={handlePagechange}
+                  totalPages={totalPage}
+                />
+              </Grid.Column>
+            </Grid>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

@@ -1,5 +1,16 @@
 import React from "react";
 import { Col, Card } from "react-bootstrap";
+import chef from "../images/chef.svg";
+
+const hourConvert = (time) => {
+  const hour = Math.floor(parseInt(time) / 60);
+  const mintue = parseInt(time) - 60 * hour;
+  if (hour >= 1) {
+    return hour + " Hour " + mintue + " Mintues";
+  } else if (hour != 0) {
+    return time + " Mintues";
+  } else return "Not Available";
+};
 
 function RecipeCard({ singleRecipe }) {
   return (
@@ -8,13 +19,35 @@ function RecipeCard({ singleRecipe }) {
         <Card.Img variant="top" src={singleRecipe.recipe.image} />
         <Card.Body>
           <Card.Title>{singleRecipe.recipe.label}</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+          <Card.Text style={{ display: "inline - flex" }}>
+            <span
+              className="material-icons"
+              style={{
+                fontSize: "20px",
+                verticalAlign: "middle",
+                marginRight: "5px",
+                top: "-1px",
+              }}
+            >
+              query_builder
+            </span>
+            <span>
+              Making Time: {hourConvert(singleRecipe.recipe.totalTime)}
+            </span>
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+          <img
+            src={chef}
+            style={{
+              display: "inline-block",
+              width: "20px",
+              height: "20px",
+              overflow: "hidden",
+              margin: "10px",
+            }}
+          />
+          {singleRecipe.recipe.source || singleRecipe.recipe.author}
         </Card.Footer>
       </Card>
     </Col>
