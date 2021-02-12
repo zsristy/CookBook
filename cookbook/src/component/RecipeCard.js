@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import chef from "../images/chef.svg";
 
 const hourConvert = (time) => {
@@ -18,7 +19,12 @@ function RecipeCard({ singleRecipe }) {
       <Card border="success" style={{ borderRadius: 20, overflow: "hidden" }}>
         <Card.Img variant="top" src={singleRecipe.recipe.image} />
         <Card.Body>
-          <Card.Title>{singleRecipe.recipe.label}</Card.Title>
+          <Card.Title>
+            <Link style={{textDecoration:"none"}} 
+                  to={{pathname:"/singlerecipie" , 
+                      state: {recipe:singleRecipe.recipe, 
+                  }}}>
+      {singleRecipe.recipe.label}</Link></Card.Title> 
           <Card.Text style={{ display: "inline - flex" }}>
             <span
               className="material-icons"
@@ -50,6 +56,7 @@ function RecipeCard({ singleRecipe }) {
           {singleRecipe.recipe.source || singleRecipe.recipe.author}
         </Card.Footer>
       </Card>
+      {console.log(singleRecipe)}
     </Col>
   );
 }

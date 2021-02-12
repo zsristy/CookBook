@@ -9,7 +9,8 @@ import { Button, Icon } from 'semantic-ui-react'
 import { Label } from 'semantic-ui-react'
 
 
-export default function SingleRecipie() {
+export default function SingleRecipie(props) {
+  const recipe=props.location.state.recipe;
   const [state,setState] =useState({})
 
   const handleRate = (e, { rating, maxRating }) =>
@@ -30,11 +31,12 @@ export default function SingleRecipie() {
             backgroundImage: "url(" + kiwi + ")",
     }}
   >
+    {console.log(recipe)}
       <DashboardHeader></DashboardHeader>
       <div className="row" style={{margin:0}}>
         <div className="col s12">
           <div className="col s5" style={{display:"flex", justifyContent:"flex-end",padding:0}}>
-          <img style={{height:380,width:"80%",borderStyle:"solid",border:4,borderColor:"goldenrod"}} src={gallery3}></img>
+          <img style={{height:380,width:"80%",borderStyle:"solid",border:4,borderColor:"goldenrod"}} src={recipe.image}></img>
           </div>
           <div className="col s7" style={{flexDirection:"column",paddingLeft:"3%",paddingTop: 280}}>
                     
@@ -157,18 +159,44 @@ export default function SingleRecipie() {
                       > 
                       <Item.Group divided>
                       <Item> 
-                        <img src={kiwi} alt style={{width:"45%",height:280}}></img>
+                        <img src={recipe.image} alt style={{width:"45%",height:280}}></img>
                         <Item.Content style={{paddingLeft:"5%"}}>
-                          <Item.Header ><h3 style={{color:"goldenrod"}}>Recipie name</h3></Item.Header>                         
+                          <Item.Header ><h3 style={{color:"goldenrod"}}>{recipe.label}</h3></Item.Header>                         
                           <Item.Extra>
-                            <Label>No suger</Label>
+                           {/* {recipe.cuisineType!=null? 
+                                  <Label style={{color:"blue"}}>{recipe.cuisineType}</Label>                           
+                            :""}  */}
+                          </Item.Extra>
+                          <Item.Extra>
+                           {/* {recipe.mealType!=null? 
+                                  <Label style={{color:"green"}}>{recipe.mealType}</Label>                           
+                            :""}   */}
+                          </Item.Extra>
+                          <Item.Extra>
+                            {recipe.dietLabels!=null?(
+                              recipe.dietLabels.map((dlabel)=>{
+                                return( 
+                                  <Label style={{color:"yellow"}}>{dlabel}</Label>
+                                  )
+                                })
+                            )
+                            :("")}                            
+                          </Item.Extra>
+                          <Item.Extra>
+                            {recipe.healthLabels!=null?(
+                              recipe.healthLabels.map((hlabel)=>{
+                                return( 
+                                  <Label style={{color:"red"}}>{hlabel}</Label>
+                                  )
+                                })
+                            )
+                            :("")}                            
                           </Item.Extra>
                         </Item.Content>
                       </Item>
                       </Item.Group>
-                      <div className="row" style={{margin:0}}>
-                        <div className="col s12"style={{paddingTop:30,paddingBottom:30}}>
-                          <div className="col s6"style={{paddingRight:"5%"}}>
+
+                        <div style={{paddingTop:30,paddingBottom:30}}>
                           <Table celled>
                               <Table.Header>
                                 <Table.Row>
@@ -179,31 +207,31 @@ export default function SingleRecipie() {
                               </Table.Header>
 
                               <Table.Body>
-                                <Table.Row>
-                                  <Table.Cell>Cell</Table.Cell>
+                              {recipe.ingredientLines.map((line,i)=>{
+                                return( 
+                                  <Table.Row>
+                                  <Table.Cell>{i}.&ensp;&ensp;&ensp;&ensp;{line}</Table.Cell>
                                 </Table.Row>
+                                  )
+                                })} 
                               </Table.Body>
                             </Table>
                           </div>
                            
-                          <div className="col s6">
+                          <div style={{paddingTop:30,paddingBottom:30}}>
                           <Item.Group>
                             <Item>
                               <Item.Content>
                                 <Item.Header><h3 style={{color:"goldenrod"}}>Preparation</h3></Item.Header>
                                 <Item.Description>
-                                  <p>
-                                    Many people also have their own barometers for what makes a cute
-                                    dog.
-                                  </p>
+                                  {recipe.preparation!=undefined? 
+                                  <p>{recipe.preparation}</p>                           
+                            :<p>To see the whole recipe <a href={recipe.url}>click here</a></p>}  
                                 </Item.Description>
                               </Item.Content>
                             </Item>
                             </Item.Group>
                           </div>
-
-                        </div>
-                      </div>
                       </form>  
                   
          
