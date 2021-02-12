@@ -37,27 +37,27 @@ export default function AdvanceSearch() {
   ];
 
   const dietoptions = [
-    { value: "balanced", label: "Balanced" },
-    { value: "high-fiber", label: "High-Fiber" },
-    { value: "high-protein", label: "High-Protein" },
-    { value: "low-carb", label: "Low-Carb" },
-    { value: "low-fat", label: "Low-Fat" },
-    { value: "low-sodium", label: "Low-Sodium" },
+    { value: "Balanced", label: "Balanced" },
+    { value: "High-Fiber", label: "High-Fiber" },
+    { value: "High-Protein", label: "High-Protein" },
+    { value: "Low-Carb", label: "Low-Carb" },
+    { value: "Low-Fat", label: "Low-Fat" },
+    { value: "Low-Sodium", label: "Low-Sodium" },
   ];
 
   const avoidoptions = [
-    { value: "alcohol-free", label: "Alcohol free" },
-    { value: "crustacean-free", label: "Crustacean free" },
-    { value: "dairy-free", label: "Dairy free" },
-    { value: "egg-free", label: "Egg free" },
-    { value: "fish-free", label: "Fish free" },
-    { value: "No-oil-added", label: "Oil free" },
-    { value: "peanut-free", label: "Peanut free" },
-    { value: "pork-free", label: "Pork free" },
-    { value: "red-meat-free", label: "Red Meat free" },
-    { value: "soy-free", label: "Soy free" },
-    { value: "vegan", label: "Vegan" },
-    { value: "vegetarian", label: "Vegetarian" },
+    { value: "Alcohol-Free", label: "Alcohol free" },
+    { value: "Crustacean-Free", label: "Crustacean free" },
+    { value: "Dairy-Free", label: "Dairy free" },
+    { value: "Egg-Free", label: "Egg free" },
+    { value: "Fish-Free", label: "Fish free" },
+    { value: "No-Oil-Added", label: "Oil free" },
+    { value: "Peanut-Free", label: "Peanut free" },
+    { value: "Pork-Free", label: "Pork free" },
+    { value: "Red-Meat-Free", label: "Red Meat free" },
+    { value: "Soy-Free", label: "Soy free" },
+    { value: "Vegan", label: "Vegan" },
+    { value: "Vegetarian", label: "Vegetarian" },
   ];
 
   const handleMealChange = (selectedOption) => {
