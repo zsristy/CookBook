@@ -33,7 +33,7 @@ export default function Signup() {
     }
     try {
       setLoading(true);
-      await signup(emailRef.current.value, passRef.current.value);
+      await signup(nameRef.current.value,emailRef.current.value, passRef.current.value);
       history.push("/");
     } catch (error) {
       setError(error);

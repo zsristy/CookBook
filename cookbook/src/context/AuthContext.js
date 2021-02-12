@@ -9,8 +9,13 @@ const useAuth = () => {
 
 const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
-  const signup = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+  const signup = (name, email, password) => {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCreds) => {
+        userCreds.user.updateProfile({ displayName: name });
+      })
+      .catch((error) => alert(error));
   };
   const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
