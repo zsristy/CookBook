@@ -93,7 +93,7 @@ export default function AdvanceSearch() {
       <div
         style={{
           backgroundSize: "cover",
-          height: 500,
+          height: "667px",
           width: "100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
@@ -216,38 +216,40 @@ export default function AdvanceSearch() {
           </div>
         </form>
       </div>
-      <div
-        style={{
-          top: "500px",
-          position: "absolute",
-          backgroundColor: "white",
-          width: "100%",
-        }}
-      >
-        <div>
-          <h3
-            style={{
-              textAlign: "center",
-              marginTop: 50,
-              marginBottom: 50,
-              fontSize: 50,
-              fontWeight: 3,
-            }}
-          >
-            Recipes By Search
-          </h3>
+      {Array.isArray(recipeList) ? (
+        <div
+          style={{
+            top: "500px",
+            position: "absolute",
+            backgroundColor: "white",
+            width: "100%",
+          }}
+        >
+          <div>
+            <h3
+              style={{
+                textAlign: "center",
+                marginTop: 50,
+                marginBottom: 50,
+                fontSize: 50,
+                fontWeight: 3,
+              }}
+            >
+              Recipes By Search
+            </h3>
 
-          <Container>
-            <Row>
-              {Array.isArray(recipeList)
-                ? recipeList.map((recipe, i) => {
-                    return <RecipeCard singleRecipe={recipe} key={i} />;
-                  })
-                : ""}
-            </Row>
-          </Container>
+            <Container>
+              <Row>
+                {recipeList.map((recipe, i) => {
+                  return <RecipeCard singleRecipe={recipe} key={i} />;
+                })}
+              </Row>
+            </Container>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
