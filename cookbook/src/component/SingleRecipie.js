@@ -7,7 +7,7 @@ import { Item, Table } from "semantic-ui-react";
 import { Rating } from "semantic-ui-react";
 import { Button, Icon } from "semantic-ui-react";
 import { Label } from "semantic-ui-react";
-import people from "../images/people.png";
+import people from "../images/chef.jpg";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import addRate from "../firebase/addRate";
