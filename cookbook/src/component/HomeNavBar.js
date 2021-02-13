@@ -11,7 +11,11 @@ export default function HomeNavBar() {
       <Navbar.Brand style={{ fontSize: 30 }}>CookBook</Navbar.Brand>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item style={{ margin: 10 }}>About Us</Nav.Item>
+          <Nav.Item style={{ margin: 10 }}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              Login
+            </Link>
+          </Nav.Item>
           <Nav.Item style={{ margin: 10 }}>
             <Link to="/signup" style={{ textDecoration: "none" }}>
               Sign Up
