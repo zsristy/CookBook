@@ -12,6 +12,7 @@ import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import addRate from "../firebase/addRate";
 import addComment from "../firebase/addComment";
+import getComment from "../firebase/getComment";
 
 export default function SingleRecipie(props) {
   const recipeId = props.location.state.recipeId;
@@ -19,6 +20,7 @@ export default function SingleRecipie(props) {
   const [rating, setRating] = useState(0);
   const [state, setState] = useState({ disabled: false });
   const [comment, setComment] = useState("");
+  const [commentList, setCommentList] = useState([]);
   const history = useHistory();
   const handleRate = async (e, { rating, maxRating }) => {
     setRating(rating);
@@ -28,6 +30,10 @@ export default function SingleRecipie(props) {
 
   const [Error, setError] = useState("");
   const { logout, currentUser } = useAuth();
+
+  useEffect(async () => {
+    await getComment(recipeId, setCommentList);
+  }, []);
 
   const username = currentUser.displayName || currentUser.email;
   const handleLogout = async () => {
@@ -45,7 +51,10 @@ export default function SingleRecipie(props) {
   };
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (comment.length) await addComment(recipeId, comment, username);
+    if (comment.length) {
+      await addComment(recipeId, comment, username);
+      setComment("");
+    }
   };
   return (
     <div>
@@ -108,6 +117,7 @@ export default function SingleRecipie(props) {
                       <input
                         onChange={handleCommentChange}
                         type="text"
+                        value={comment}
                         placeholder="Please leave a comment"
                         style={{
                           paddingLeft: "20px",
@@ -193,13 +203,16 @@ export default function SingleRecipie(props) {
                     }}
                   >
                     <Item.Group divided>
-                      <Item>
-                        <Item.Content>
-                          <Item.Meta>Description</Item.Meta>
-                          <Item.Description>hibijabi</Item.Description>
-                          <Item.Extra>Additional Details</Item.Extra>
-                        </Item.Content>
-                      </Item>
+                      {commentList.map((c, id) => {
+                        return (
+                          <Item key={id}>
+                            <Item.Content>
+                              <Item.Meta>{c.user}</Item.Meta>
+                              <Item.Description>{c.comment}</Item.Description>
+                            </Item.Content>
+                          </Item>
+                        );
+                      })}
                     </Item.Group>
                   </div>
                 </div>
