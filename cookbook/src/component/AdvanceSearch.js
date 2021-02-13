@@ -9,7 +9,7 @@ import Multiselect from "./multiselect";
 import Singleselect from "./singleselect";
 import getFilterRecipe from "../firebase/getFilterRecipe";
 import { useAuth } from "../context/AuthContext";
-
+import { useHistory } from "react-router-dom";
 export default function AdvanceSearch() {
   const [meal, setMeal] = useState("");
   const [cuisine, setCuisine] = useState("");
@@ -19,6 +19,7 @@ export default function AdvanceSearch() {
   const [recipeList, setRecipeList] = useState();
   const { logout } = useAuth();
   const [Error, setError] = useState("");
+  const history = useHistory;
   const handleLogout = async () => {
     try {
       await logout().then(() => {
