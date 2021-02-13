@@ -7,3 +7,5 @@ npm install semantic-ui-react semantic-ui-css
 npm install react-select
 npm install react-images-upload
 npm install autosize
+npm install immer
+npm install react-simple-timefield

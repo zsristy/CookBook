@@ -3,6 +3,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 export default function MultiInput(props) {
+    const onChange = props.onChange;
     const animatedComponents = makeAnimated()
     const customStyles1 = {
         control: (provided, state) => ({
@@ -21,6 +22,7 @@ export default function MultiInput(props) {
                               </div>
                               <div className="col s11" style={{paddingLeft:"6%"}}>
                               <Select
+                              onChange={onChange}
                               styles={customStyles1}
                               placeholder={props.title} 
                               closeMenuOnSelect={false}
