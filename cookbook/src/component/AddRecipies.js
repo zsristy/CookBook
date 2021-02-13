@@ -8,10 +8,12 @@ import { Button } from "semantic-ui-react";
 import uploadImage from "../firebase/uploadImage";
 import addRecipe from "../firebase/addRecipe";
 import { useAuth } from "../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function AddRecipies() {
   const { currentUser } = useAuth();
   const author = currentUser.displayName;
+  const history = useHistory();
   const [meal, setMeal] = useState("");
   const [recipePrep, setRecipePrep] = useState("");
   const [itemList, setItemList] = useState([{ name: "" }]);
@@ -167,7 +169,7 @@ export default function AddRecipies() {
       recipePrep,
       author
     );
-    
+    history.push('/');
   };
 
   return (
