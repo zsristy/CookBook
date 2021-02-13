@@ -27,10 +27,10 @@ function App() {
         >
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
-          <Route path="/addrecipies" exact component={AddRecipies} />
+          <PrivateRoute path="/addrecipies" exact component={AddRecipies} />
         </div>
         <PrivateRoute path="/" exact component={Dashboard} />
-        <PrivateRoute path="/singlerecipie" exact component={SingleRecipie} /> 
+        <PrivateRoute path="/singlerecipie" exact component={SingleRecipie} />
         <PrivateRoute path="/search" exact component={AdvanceSearch} />
         <PrivateRoute path="/profile" exact component={Profile} />
       </BrowserRouter>
