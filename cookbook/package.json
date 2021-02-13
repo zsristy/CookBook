@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^4.1.0",
+    "react-simple-timefield": "^3.2.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "web-vitals": "^0.2.4"

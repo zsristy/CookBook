@@ -9,6 +9,7 @@ import uploadImage from "../firebase/uploadImage";
 import addRecipe from "../firebase/addRecipe";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import TimeField from "react-simple-timefield";
 
 export default function AddRecipies() {
   const { currentUser } = useAuth();
@@ -23,6 +24,7 @@ export default function AddRecipies() {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const textarea = useRef();
+  const [time, setTime] = useState("00:00:00");
   const style1 = {
     outline: "none",
     overflow: "auto",
@@ -131,6 +133,13 @@ export default function AddRecipies() {
     setTitle(e.target.value);
   };
 
+  const handleTimeChange = (event, value) => {
+    const newTime = value.replace(/-/g, ":");
+    const time = newTime.substr(0, 5);
+    const timeSeconds = newTime.padEnd(8, time.substr(5, 3));
+    setTime(timeSeconds);
+  };
+
   const handleMealChange = (selectedOption) => {
     if (selectedOption !== null) setMeal(selectedOption.value);
     else setMeal("");
@@ -156,6 +165,9 @@ export default function AddRecipies() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    var a = time.split(":");
+    var minutes = +a[0] * 60 + +a[1];
     let item = itemList.map((a) => a.name);
     let validItem = item.filter((a) => a.length > 0);
     await addRecipe(
@@ -167,9 +179,10 @@ export default function AddRecipies() {
       validItem,
       imageUrl,
       recipePrep,
-      author
+      author,
+      minutes
     );
-    history.push('/');
+    history.push("/");
   };
 
   return (
@@ -287,6 +300,7 @@ export default function AddRecipies() {
                           Recipe
                         </label>
                       </div>
+
                       <div
                         className="col s11"
                         style={{ paddingLeft: "7%", paddingRight: "7%" }}
@@ -303,6 +317,38 @@ export default function AddRecipies() {
                             border: "white",
                             boxShadow: "none",
                             borderRadius: "20px",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col s12">
+                      <div className="col s2">
+                        <label
+                          style={{
+                            fontSize: 16,
+                            color: "black",
+                            paddingTop: "15%",
+                            paddingLeft: "10%",
+                          }}
+                        >
+                          Prepation Time
+                        </label>
+                      </div>
+                      <div className="col s10" style={{ paddingRight: "7%" }}>
+                        <TimeField
+                          showSeconds
+                          value={time}
+                          onChange={handleTimeChange}
+                          style={{
+                            border: "2px solid #000",
+                            fontSize: 28,
+                            width: 105,
+                            backgroundColor: "white",
+                            padding: "5px 8px",
+                            color: "#000",
+                            borderRadius: 20,
                           }}
                         />
                       </div>

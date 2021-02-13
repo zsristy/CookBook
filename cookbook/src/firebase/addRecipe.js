@@ -10,7 +10,8 @@ const addRecipe = async (
   validItem,
   imageUrl,
   recipePrep,
-  author
+  author,
+  minutes
 ) => {
   await app
     .firestore()
@@ -28,7 +29,10 @@ const addRecipe = async (
         label: title,
         author: author,
         prep: recipePrep,
+        totalTime: minutes,
       },
+      rating: [],
+      comment: [],
     })
     .then(() => {})
     .catch((error) => {
