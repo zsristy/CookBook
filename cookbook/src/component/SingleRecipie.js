@@ -7,14 +7,17 @@ import { Item,Table} from 'semantic-ui-react'
 import { Rating } from 'semantic-ui-react'
 import { Button, Icon } from 'semantic-ui-react'
 import { Label } from 'semantic-ui-react'
+import people from "../images/people.png"
 
 
 export default function SingleRecipie(props) {
   const recipe=props.location.state.recipe;
-  const [state,setState] =useState({})
-
-  const handleRate = (e, { rating, maxRating }) =>
-    setState({ rating, maxRating })
+  const [rating,setRating] =useState({})
+  const [state,setState]=useState({disabled : false})
+  const handleRate = (e, { rating, maxRating }) =>{
+    setRating({ rating, maxRating })
+    setState({disabled: true})
+  }
    
   return (
 
@@ -40,7 +43,8 @@ export default function SingleRecipie(props) {
           </div>
           <div className="col s7" style={{flexDirection:"column",paddingLeft:"3%",paddingTop: 280}}>
                     
-                    <Rating style={{height:20,paddingLeft:"4%"}} maxRating={5} icon='star' size='huge' onRate={handleRate} />
+                    <Rating style={{height:20,paddingLeft:"4%"}} maxRating={5} icon='star' size='huge' onRate={handleRate} disabled={state.disabled}/>
+                    {console.log(rating.rating)}
                     
                       <div className="row" style={{margin:0,paddingTop:10}}>
                         <div className="col s12">
@@ -107,9 +111,9 @@ export default function SingleRecipie(props) {
              {/* profile card */}
              <Item.Group>
               <Item>
-              <img src={kiwi} alt style={{width:90,height:90,borderRadius:"50%"}}></img>
+              <img src={people} alt style={{width:90,height:90,borderRadius:"50%",border:"solid",borderColor:"goldenrod"}}></img>
               <Item.Content style={{paddingTop:40,paddingLeft:10}}>
-              <Item.Header >Chef</Item.Header>
+              <Item.Header >{recipe.source ||recipe.author}</Item.Header>
               </Item.Content>
               </Item>
               </Item.Group>
