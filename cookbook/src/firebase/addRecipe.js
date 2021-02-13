@@ -31,7 +31,7 @@ const addRecipe = async (
         prep: recipePrep,
         totalTime: minutes,
       },
-      rating: [],
+      rating: 0,
       comment: [],
     })
     .then(() => {})

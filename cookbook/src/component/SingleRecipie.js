@@ -10,15 +10,18 @@ import { Label } from "semantic-ui-react";
 import people from "../images/people.png";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import addRate from "../firebase/addRate";
 
 export default function SingleRecipie(props) {
+  const recipeId = props.location.state.recipeId;
   const recipe = props.location.state.recipe;
-  const [rating, setRating] = useState({});
+  const [rating, setRating] = useState(0);
   const [state, setState] = useState({ disabled: false });
   const history = useHistory();
   const handleRate = (e, { rating, maxRating }) => {
-    setRating({ rating, maxRating });
+    setRating(rating);
     setState({ disabled: true });
+    addRate(recipeId, rating);
   };
   const [Error, setError] = useState("");
   const { logout } = useAuth();
@@ -44,7 +47,6 @@ export default function SingleRecipie(props) {
           backgroundImage: "url(" + kiwi + ")",
         }}
       >
-        {console.log(recipe)}
         <DashboardHeader handleLogout={handleLogout}></DashboardHeader>
         <div className="row" style={{ margin: 0 }}>
           <div className="col s12">
@@ -76,14 +78,16 @@ export default function SingleRecipie(props) {
               }}
             >
               <Rating
-                style={{ height: 20, paddingLeft: "4%" }}
+                style={{
+                  height: 20,
+                  paddingLeft: "4%",
+                }}
                 maxRating={5}
                 icon="star"
                 size="huge"
                 onRate={handleRate}
                 disabled={state.disabled}
               />
-              {console.log(rating.rating)}
 
               <div className="row" style={{ margin: 0, paddingTop: 10 }}>
                 <div className="col s12">
