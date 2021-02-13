@@ -8,11 +8,11 @@ import { Link, useHistory } from "react-router-dom";
 import { Popup } from "semantic-ui-react";
 import photo6 from "../images/photo6.jpg";
 import getRecipeByAuthor from "../firebase/getRecipeByAuthor";
-
-import { Icon } from "semantic-ui-react";
+import { Button, Icon } from 'semantic-ui-react'
 
 export default function Profile() {
   const { currentUser, logout } = useAuth();
+  const [Error, setError] = useState("");
   const userName = currentUser.displayName;
   const userEmail = currentUser.email;
   const [recipeList, setRecipeList] = useState([]);
@@ -20,9 +20,6 @@ export default function Profile() {
   const [imageUrl, setImageUrl] = useState("");
 
   const [state, setState] = useState({ disabled: true });
-  const editonClick = () => {
-    setState({ disabled: false });
-  };
   const okonClick = () => {
     setState({ disabled: true });
   };
@@ -64,6 +61,7 @@ export default function Profile() {
   const handleImageUpload = async (e) => {
     const [file] = e.target.files;
     if (file) {
+        setState({ disabled: false });
       const reader = new FileReader();
       const { current } = uploadedImage;
       current.file = file;
@@ -135,7 +133,6 @@ export default function Profile() {
                     <input
                       type="file"
                       accept="image/*"
-                      disabled={state.disabled}
                       onChange={handleImageUpload}
                       ref={imageUploader}
                       style={{
@@ -153,7 +150,7 @@ export default function Profile() {
                       }}
                       onClick={() => imageUploader.current.click()}
                     >
-                      <img
+                      <img alt
                         ref={uploadedImage}
                         style={{
                           width: "100%",
@@ -169,31 +166,21 @@ export default function Profile() {
                     >
                       <Popup
                         trigger={
-                          <i
-                            className="material-icons"
-                            onClick={okonClick}
-                            style={{ cursor: "pointer" }}
-                          >
-                            check_circle
-                          </i>
+                            <Button size='mini' onClick={okonClick}
+                            disabled={state.disabled} 
+                            icon>
+                            <Icon name='check' />
+                        </Button>
+                        //   <i
+                        //     className="material-icons"
+                        //     onClick={okonClick}
+                        //     disabled={state.disabled}
+                        //     style={{ cursor: "pointer" }}
+                        //   >
+                        //     check_circle
+                        //   </i>
                         }
                         content="Click here to save new photo"
-                        position="top center"
-                        size="mini"
-                        style={style}
-                        inverted
-                      />
-                      <Popup
-                        trigger={
-                          <i
-                            className="material-icons"
-                            onClick={editonClick}
-                            style={{ cursor: "pointer" }}
-                          >
-                            add_circle
-                          </i>
-                        }
-                        content="Click here then top circle to upload new photo"
                         position="top center"
                         size="mini"
                         style={style}
