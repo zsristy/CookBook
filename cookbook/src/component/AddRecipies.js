@@ -15,6 +15,7 @@ export default function AddRecipies() {
   const { currentUser } = useAuth();
   const author = currentUser.displayName;
   const history = useHistory();
+  const [Error, setError] = useState("");
   const [meal, setMeal] = useState("");
   const [recipePrep, setRecipePrep] = useState("");
   const [itemList, setItemList] = useState([{ name: "" }]);
