@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import gallery7 from "../images/gallery7.jpg";
 import DashboardHeader from "./DashboardHeader";
-import { Button } from "semantic-ui-react";
+import { Item } from 'semantic-ui-react'
 import uploadImage from "../firebase/uploadImage";
 import { useAuth } from "../context/AuthContext";
-import { useHistory } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
+import { Popup } from "semantic-ui-react";
+import photo6 from "../images/photo6.jpg"
 
 export default function Profile() {
   const { currentUser } = useAuth();
@@ -29,6 +30,11 @@ export default function Profile() {
     borderColor: "white",
     fontSize: "16px",
     backgroundColor: "white",
+  };
+  const style = {
+    borderRadius: 0,
+    opacity: 0.7,
+    padding: "2em",
   };
 
 
@@ -62,6 +68,10 @@ export default function Profile() {
         }}
       >
         <DashboardHeader></DashboardHeader>
+        <div style={{top: "180px",position: "absolute",width:"100%"}}>
+        <h1 style={{color:"white",paddingLeft:"38%"}}>See Profile Infomation</h1>
+        </div>
+        <div style={{display:"flex", justifyContent:"center"}}>
       <div className="row" 
       style={{
             top: "240px",
@@ -69,7 +79,7 @@ export default function Profile() {
             width: "86%",
             margin:0}}>
         <div className="col s12">
-          <div className="col s4" style={{display:"flex", justifyContent:"flex-end",padding:0}}>
+          <div className="col s4" style={{display:"flex", justifyContent:"center",padding:0}}>
           <div
             style={{
               width:"86%",  
@@ -82,7 +92,6 @@ export default function Profile() {
               justifyContent: "center",
             }}
           >
-              <form>
           <div
                   style={{
                     display: "flex",
@@ -112,6 +121,7 @@ export default function Profile() {
                     }}
                     onClick={() => imageUploader.current.click()}
                   >
+                      
                     <img
                       ref={uploadedImage}
                       style={{
@@ -123,33 +133,78 @@ export default function Profile() {
                     />
                   </div>
                   <div className="row" style={{margin:0,paddingLeft:"65%"}}>
-                  <i
-                              className="material-icons" onClick={okonClick}
-                              style={{ cursor: "pointer"}}
-                            >
-                              check_circle
-                            </i>
-                            <i
-                                className="material-icons" onClick={editonClick}
-                                style={{ cursor: "pointer"}}
-                              >
-                                add_circle
-                              </i>
+                  <Popup
+                 trigger={ <i
+                    className="material-icons" onClick={okonClick}
+                    style={{ cursor: "pointer"}}
+                  >
+                    check_circle
+                  </i>}
+                 content="Click here to save new photo"
+                 position="top center"
+                 size='mini'
+                 style={style}
+                 inverted
+                 />
+                 <Popup
+                 trigger={ <i
+                    className="material-icons" onClick={editonClick}
+                    style={{ cursor: "pointer"}}
+                  >
+                    add_circle
+                  </i>}
+                 content="Click here then top circle to upload new photo"
+                 position="top center"
+                 size='mini'
+                 style={style}
+                 inverted
+                 />
+                            
 
                   </div>
                 </div>
-
-                </form>
                 <div style={{display:"flex",justifyContent:"center",paddingBottom:30}}>
                 <p><h4 >Name</h4><br></br>
                 Email</p>
                 </div>
                 </div>
           </div>
-          <div className="col s7" style={{display:"flex", justifyContent:"flex-end",padding:0}}>
-              
+          <div className="col s8" style={{display:"flex", justifyContent:"flex-end",paddingBottom:50,top: "180px"}}>
+          <div
+            style={{
+              width:"96%",  
+              minHeight:220,
+              background: "whitesmoke",
+              opacity: 0.8,
+              borderRadius: 30,
+              padding: 35,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+              <h4 style={{paddingLeft:"3%",paddingBottom:10}}>See personal recipies</h4>
+              <div className="row" style={{  position: "relative", left: 0,top: 0,margin:0}}>
+                  <div className="col s12">
+
+                      {/*iteration container  */}
+                      <div className="col s6">
+                          
+                      <Item>
+                        <img src={photo6} style={{height:100,width:140}}/>
+                        <Item.Content ><Link style={{textDecoration:"none"}}>Name</Link></Item.Content>
+                        <Item.Content >Rating</Item.Content>
+                        </Item>
+                      </div>
+                    {/*  */}
+
+                  </div>
+              </div>
+
+           </div>   
           </div>
       </div>
+    </div>
     </div>
     </div>
     </div>
