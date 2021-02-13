@@ -15,10 +15,12 @@ const AuthProvider = (props) => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCreds) => {
         userCreds.user.updateProfile({ displayName: name });
+        console.log(userCreds.user.uid);
         app
           .firestore()
           .collection("users")
-          .add({
+          .doc(userCreds.user.uid)
+          .set({
             name: name,
             email: email,
             image: "",
