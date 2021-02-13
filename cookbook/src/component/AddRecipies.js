@@ -83,6 +83,17 @@ export default function AddRecipies() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
 
+  const { logout } = useAuth();
+  const handleLogout = async () => {
+    try {
+      await logout().then(() => {
+        history.push("/home");
+      });
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   const handleImageUpload = async (e) => {
     const [file] = e.target.files;
     if (file) {
@@ -197,7 +208,7 @@ export default function AddRecipies() {
           backgroundImage: "url(" + nutsteak + ")",
         }}
       >
-        <DashboardHeader></DashboardHeader>
+        <DashboardHeader handleLogout={handleLogout}></DashboardHeader>
         <h2
           style={{
             paddingTop: 200,

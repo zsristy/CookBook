@@ -8,6 +8,7 @@ import { Container, Row } from "react-bootstrap";
 import Multiselect from "./multiselect";
 import Singleselect from "./singleselect";
 import getFilterRecipe from "../firebase/getFilterRecipe";
+import { useAuth } from "../context/AuthContext";
 
 export default function AdvanceSearch() {
   const [meal, setMeal] = useState("");
@@ -16,6 +17,17 @@ export default function AdvanceSearch() {
   const [health, setHealth] = useState([]);
   const [title, setTitle] = useState("");
   const [recipeList, setRecipeList] = useState();
+  const { logout } = useAuth();
+  const [Error, setError] = useState("");
+  const handleLogout = async () => {
+    try {
+      await logout().then(() => {
+        history.push("/home");
+      });
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const mealoptions = [
     { value: "Breakfast", label: "Breakfast" },
@@ -100,7 +112,7 @@ export default function AdvanceSearch() {
           backgroundImage: "url(" + kiwi + ")",
         }}
       >
-        <DashboardHeader></DashboardHeader>
+        <DashboardHeader handleLogout={handleLogout}></DashboardHeader>
 
         <form onSubmit={handleSubmit}>
           <div

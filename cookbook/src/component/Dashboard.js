@@ -61,7 +61,7 @@ export default function Dashboard() {
     }
   };
 
-  console.log(totalPage);
+  
 
   return (
     <div>
