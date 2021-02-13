@@ -3,17 +3,18 @@ import { Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import chef from "../images/chef.svg";
 
-const hourConvert = (time) => {
-  const hour = Math.floor(parseInt(time) / 60);
-  const mintue = parseInt(time) - 60 * hour;
-  if (hour >= 1) {
-    return hour + " Hour " + mintue + " Mintues";
-  } else if (hour != 0) {
-    return time + " Mintues";
-  } else return "Not Available";
-};
+// const hourConvert = (time) => {
+//   const hour = Math.floor(parseInt(time) / 60);
+//   const mintue = parseInt(time) - 60 * hour;
+//   if (hour >= 1) {
+//     return hour + " Hour " + mintue + " Mintues";
+//   } else if ((hour > 0) & (hour < 1)) {
+//     return time + " Mintues";
+//   } else return "Not Available";
+// };
 
 function RecipeCard({ singleRecipe }) {
+  console.log(singleRecipe.recipe.totalTime);
   return (
     <Col sm={4}>
       <Card border="success" style={{ borderRadius: 20, overflow: "hidden" }}>
@@ -46,7 +47,10 @@ function RecipeCard({ singleRecipe }) {
               query_builder
             </span>
             <span>
-              Making Time: {hourConvert(singleRecipe.recipe.totalTime)}
+              Making Time:{" "}
+              {singleRecipe.recipe.totalTime === 0
+                ? "Not Available"
+                : singleRecipe.recipe.totalTime + " Minitues"}
             </span>
           </Card.Text>
         </Card.Body>
