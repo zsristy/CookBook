@@ -104,8 +104,8 @@ export default function AddRecipies() {
         current.src = e.target.result;
       };
       reader.readAsDataURL(file);
+      await uploadImage(file, setImageUrl);
     }
-    await uploadImage(file, setImageUrl);
   };
 
   useEffect(() => {
