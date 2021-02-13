@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Icon } from "semantic-ui-react";
 
 export default function DashboardHeader({ handleLogout }) {
   return (
@@ -11,13 +13,25 @@ export default function DashboardHeader({ handleLogout }) {
       }}
       variant="dark"
     >
-      <Navbar.Brand>
-        <div style={{ fontSize: 30 }}>CookBook</div>
-      </Navbar.Brand>
+      <Link to="/">
+        <Navbar.Brand>
+          <div style={{ fontSize: 30 }}>CookBook</div>
+        </Navbar.Brand>
+      </Link>
+
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item style={{ margin: 10 }}>Home</Nav.Item>
-          <Nav.Item style={{ margin: 10 }}>Features</Nav.Item>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <Nav.Item style={{ margin: 10, fontSize: 15 }}>Profile</Nav.Item>
+          </Link>
+
+          <Link to="/addrecipies" style={{ textDecoration: "none" }}>
+            <Nav.Item style={{ margin: 10, fontSize: 15 }}>
+              <Icon name="plus square outline" />
+              Add Recipe
+            </Nav.Item>
+          </Link>
+
           <Nav.Item style={{ margin: 10 }}>
             <Button
               variant="outline-light"
