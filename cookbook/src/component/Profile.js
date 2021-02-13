@@ -3,30 +3,36 @@ import gallery7 from "../images/gallery7.jpg";
 import DashboardHeader from "./DashboardHeader";
 import { Item } from "semantic-ui-react";
 import uploadImage from "../firebase/uploadImage";
+import updateProfileImage from "../firebase/updateProfileImage";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Popup } from "semantic-ui-react";
-import photo6 from "../images/photo6.jpg";
+import default2 from "../images/default.jpg";
 import getRecipeByAuthor from "../firebase/getRecipeByAuthor";
-import { Button, Icon } from 'semantic-ui-react'
+import getProfileImage from "../firebase/getProfileImage";
+import { Button, Icon } from "semantic-ui-react";
 
 export default function Profile() {
   const { currentUser, logout } = useAuth();
   const [Error, setError] = useState("");
   const userName = currentUser.displayName;
+  const userId = currentUser.uid;
   const userEmail = currentUser.email;
   const [recipeList, setRecipeList] = useState([]);
   const history = useHistory();
   const [imageUrl, setImageUrl] = useState("");
 
   const [state, setState] = useState({ disabled: true });
-  const okonClick = () => {
+  const okonClick = async () => {
     setState({ disabled: true });
+    await updateProfileImage(userId, imageUrl);
   };
 
-  useEffect(() => {
-    getRecipeByAuthor(userName, setRecipeList);
-  }, []);
+  useEffect(async () => {
+    await getRecipeByAuthor(userName, setRecipeList);
+    await getProfileImage(userId, setImageUrl);
+  }, [userName, userId]);
+  
 
   const handleLogout = async () => {
     try {
@@ -61,7 +67,7 @@ export default function Profile() {
   const handleImageUpload = async (e) => {
     const [file] = e.target.files;
     if (file) {
-        setState({ disabled: false });
+      setState({ disabled: false });
       const reader = new FileReader();
       const { current } = uploadedImage;
       current.file = file;
@@ -150,7 +156,9 @@ export default function Profile() {
                       }}
                       onClick={() => imageUploader.current.click()}
                     >
-                      <img alt
+                      <img
+                        alt
+                        src={imageUrl}
                         ref={uploadedImage}
                         style={{
                           width: "100%",
@@ -166,19 +174,14 @@ export default function Profile() {
                     >
                       <Popup
                         trigger={
-                            <Button size='mini' onClick={okonClick}
-                            disabled={state.disabled} 
-                            icon>
-                            <Icon name='check' />
-                        </Button>
-                        //   <i
-                        //     className="material-icons"
-                        //     onClick={okonClick}
-                        //     disabled={state.disabled}
-                        //     style={{ cursor: "pointer" }}
-                        //   >
-                        //     check_circle
-                        //   </i>
+                          <Button
+                            size="mini"
+                            onClick={okonClick}
+                            disabled={state.disabled}
+                            icon
+                          >
+                            <Icon name="check" />
+                          </Button>
                         }
                         content="Click here to save new photo"
                         position="top center"
@@ -240,7 +243,7 @@ export default function Profile() {
                               <div className="col s6" key={i}>
                                 <Item>
                                   <img
-                                    src={singleRecipe.recipe.image || photo6}
+                                    src={singleRecipe.recipe.image || default2}
                                     style={{ height: 100, width: 140 }}
                                   />
                                   <Item.Content>
