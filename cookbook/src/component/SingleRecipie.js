@@ -315,11 +315,13 @@ export default function SingleRecipie(props) {
                       <Item>
                         <Item.Content>
                           <Item.Header>
-                            <h3 style={{ color: "goldenrod" }}>Preparation</h3>
+                            <h3 style={{ color: "goldenrod" }}>
+                              Preparation Steps
+                            </h3>
                           </Item.Header>
                           <Item.Description>
-                            {recipe.preparation != undefined ? (
-                              <p>{recipe.preparation}</p>
+                            {recipe.prep !== undefined ? (
+                              <p>{recipe.prep}</p>
                             ) : (
                               <p>
                                 To see the whole recipe{" "}
