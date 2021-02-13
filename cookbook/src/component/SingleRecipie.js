@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import kiwi from "../images/kiwi.jpg";
+import kiwi from "../images/photo-break.jpg";
 import gallery3 from "../images/gallery3.jpg";
 import DashboardHeader from "./DashboardHeader";
 import "semantic-ui-css/semantic.min.css";
@@ -249,20 +249,28 @@ export default function SingleRecipie(props) {
                           <h3 style={{ color: "goldenrod" }}>{recipe.label}</h3>
                         </Item.Header>
                         <Item.Extra>
-                          {/* {recipe.cuisineType!=null? 
-                                  <Label style={{color:"blue"}}>{recipe.cuisineType}</Label>                           
-                            :""}  */}
+                          {recipe.cuisine != null ? (
+                            <Label style={{ color: "blue" }}>
+                              {recipe.cuisine}
+                            </Label>
+                          ) : (
+                            ""
+                          )}
                         </Item.Extra>
                         <Item.Extra>
-                          {/* {recipe.mealType!=null? 
-                                  <Label style={{color:"green"}}>{recipe.mealType}</Label>                           
-                            :""}   */}
+                          {recipe.meal != null ? (
+                            <Label style={{ color: "purple" }}>
+                              {recipe.meal}
+                            </Label>
+                          ) : (
+                            ""
+                          )}
                         </Item.Extra>
                         <Item.Extra>
                           {recipe.dietLabels != null
                             ? recipe.dietLabels.map((dlabel) => {
                                 return (
-                                  <Label style={{ color: "yellow" }}>
+                                  <Label style={{ color: "teal" }}>
                                     {dlabel}
                                   </Label>
                                 );

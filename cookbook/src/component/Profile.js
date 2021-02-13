@@ -32,7 +32,6 @@ export default function Profile() {
     await getRecipeByAuthor(userName, setRecipeList);
     await getProfileImage(userId, setImageUrl);
   }, [userName, userId]);
-  
 
   const handleLogout = async () => {
     try {
@@ -239,6 +238,7 @@ export default function Profile() {
                       {/*iteration container  */}
                       {Array.isArray(recipeList)
                         ? recipeList.map((singleRecipe, i) => {
+                            console.log(singleRecipe);
                             return (
                               <div className="col s6" key={i}>
                                 <Item>
@@ -262,12 +262,12 @@ export default function Profile() {
                                   </Item.Content>
                                   <Item.Content>
                                     <Icon
+                                      circular
+                                      color="yellow"
+                                      inverted
                                       name="star"
-                                      disabled={
-                                        singleRecipe.recipe.rate ? false : true
-                                      }
-                                    ></Icon>
-                                    {singleRecipe.recipe.rate || "Yet to rate"}
+                                    />
+                                    {singleRecipe.rate || "Yet to rate"}
                                   </Item.Content>
                                 </Item>
                               </div>

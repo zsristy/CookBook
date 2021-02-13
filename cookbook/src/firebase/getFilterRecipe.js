@@ -9,6 +9,7 @@ const getFilterRecipe = async (
   health,
   setRecipeList
 ) => {
+  title = title.toLowerCase();
   const snapshot = await app.firestore().collection("recipe").get();
   if (snapshot.empty) {
     console.log("No matching documents.");

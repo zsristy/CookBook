@@ -2,6 +2,7 @@ import app from "./Firebase";
 import "firebase/firestore";
 
 const getRecipe = async (searchTitle, setRecipeList) => {
+  searchTitle = searchTitle.toLowerCase();
   const snapshot = await app.firestore().collection("recipe").get();
   if (snapshot.empty) {
     console.log("No matching documents.");
