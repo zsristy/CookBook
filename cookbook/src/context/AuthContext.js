@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { auth } from "../firebase/Firebase";
+import app from "../firebase/Firebase";
 
 const AuthContext = React.createContext();
 
@@ -14,6 +15,17 @@ const AuthProvider = (props) => {
       .createUserWithEmailAndPassword(email, password)
       .then((userCreds) => {
         userCreds.user.updateProfile({ displayName: name });
+        app
+          .firestore()
+          .collection("users")
+          .add({
+            name: name,
+            email: email,
+            image: "",
+          })
+          .then(() => {
+            alert("Successfully Account Created");
+          });
       })
       .catch((error) => alert(error));
   };
