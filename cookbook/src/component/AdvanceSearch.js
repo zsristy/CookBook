@@ -175,21 +175,21 @@ export default function AdvanceSearch() {
                   </div>
                 </div>
 
-                <div className="col s6" style={{ paddingTop: 15 }}>
+                {/* <div className="col s6" style={{ paddingTop: 15 }}>
                   <Singleselect
                     title="Meal"
                     handleChange={handleMealChange}
                     options={mealoptions}
                   ></Singleselect>
-                </div>
+                </div> */}
 
-                <div className="col s6" style={{ paddingTop: 15 }}>
+                {/* <div className="col s6" style={{ paddingTop: 15 }}>
                   <Singleselect
                     title="Cuisine"
                     handleChange={handleCuisineChange}
                     options={cuisineoptions}
                   ></Singleselect>
-                </div>
+                </div> */}
               </div>
 
               <div
