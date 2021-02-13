@@ -42,7 +42,6 @@ export default function Home() {
     await getRandomRecipe(setActiveRecipe);
   }, []);
 
-  
   const handleChange = (e) => {
     setSearchTitle(e.target.value);
   };
@@ -153,7 +152,7 @@ export default function Home() {
             cultural notes and so on.
           </p>
           {/* -------------------------------------------------------------------------------------------------LINK */}
-          <Link to="#">
+          <Link to="#" style={{ textDecoration: "none" }}>
             <p style={{ color: "goldenrod", marginLeft: 50, marginBottom: 50 }}>
               | ABOUT US
             </p>

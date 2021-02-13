@@ -15,11 +15,10 @@ const inputStyle = {
   marginTop: "20px",
 };
 
-
 const Login = () => {
   const emailRef = useRef();
   const passRef = useRef();
-   const { login } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -89,6 +88,9 @@ const Login = () => {
         </Card>
         <div className="w-100 text-center mt-2" style={{ color: "white" }}>
           Don't Have an Account?<Link to="/signup"> Create New Account!</Link>
+        </div>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}>
+          <Link to="/home">Back to Home</Link>
         </div>
       </div>
     </Container>

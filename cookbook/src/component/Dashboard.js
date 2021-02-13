@@ -7,7 +7,8 @@ import RecipeCard from "./RecipeCard";
 import { Container, Row } from "react-bootstrap";
 import getRecipe from "../firebase/getRecipe";
 import SimpleSearch from "./SimpleSearch";
-import { Pagination,Grid } from "semantic-ui-react";
+import { Pagination, Grid } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 
 export default function Dashboard() {
   const { logout } = useAuth();
@@ -27,7 +28,7 @@ export default function Dashboard() {
     e.preventDefault();
     await getRecipe(searchTitle, setRecipeList);
     if (recipeList !== undefined) {
-      setActivePage(1)
+      setActivePage(1);
       setTotalPage(Math.ceil(recipeList.length / 6));
       setActiveRecipe(pagination(recipeList, 1, 6));
     }
@@ -60,8 +61,6 @@ export default function Dashboard() {
       setError(error);
     }
   };
-
-  
 
   return (
     <div>
@@ -104,6 +103,19 @@ export default function Dashboard() {
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
+        </div>
+        <div style={{ float: "left", padding: 10, marginLeft: 350 }}>
+          <Link to="/search">
+            <Button
+              icon
+              labelPosition="right"
+              color="olive"
+              style={{ border: "2px solid white", borderRadius: "25px" }}
+            >
+              Advance Search
+              <Icon name="right arrow" />
+            </Button>
+          </Link>
         </div>
       </div>
       {Array.isArray(activeRecipe) ? (

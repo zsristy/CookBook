@@ -3,7 +3,6 @@ import { Button, Card, Form, Alert, Container } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-
 const inputStyle = {
   border: "1px solid #bfbfbf",
   fontSize: "14px",
@@ -33,7 +32,11 @@ export default function Signup() {
     }
     try {
       setLoading(true);
-      await signup(nameRef.current.value,emailRef.current.value, passRef.current.value);
+      await signup(
+        nameRef.current.value,
+        emailRef.current.value,
+        passRef.current.value
+      );
       history.push("/");
     } catch (error) {
       setError(error);
@@ -112,6 +115,9 @@ export default function Signup() {
         </Card>
         <div className="w-100 text-center mt-2" style={{ color: "white" }}>
           Already Have an Account? <Link to="/login">Log In!</Link>
+        </div>
+        <div className="w-100 text-center mt-2" style={{ color: "white" }}>
+          <Link to="/home">Back to Home</Link>
         </div>
       </div>
     </Container>
