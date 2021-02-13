@@ -7,6 +7,7 @@ import SingleRecipie from "./component/SingleRecipie";
 import Login from "./component/Login";
 import Home from "./component/Home";
 import Dashboard from "./component/Dashboard";
+import Profile from "./component/Profile";
 import backgroundimage from "./images/fresh-ingredients-cooking-pasta-wooden-background.jpg";
 import PrivateRoute from "./PrivateRoute";
 
@@ -31,6 +32,7 @@ function App() {
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/singlerecipie" exact component={SingleRecipie} /> 
         <PrivateRoute path="/search" exact component={AdvanceSearch} />
+        <PrivateRoute path="/profile" exact component={Profile} />
       </BrowserRouter>
     </div>
   );
