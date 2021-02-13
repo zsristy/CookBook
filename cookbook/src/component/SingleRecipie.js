@@ -11,20 +11,25 @@ import people from "../images/people.png";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import addRate from "../firebase/addRate";
+import addComment from "../firebase/addComment";
 
 export default function SingleRecipie(props) {
   const recipeId = props.location.state.recipeId;
   const recipe = props.location.state.recipe;
   const [rating, setRating] = useState(0);
   const [state, setState] = useState({ disabled: false });
+  const [comment, setComment] = useState("");
   const history = useHistory();
-  const handleRate = (e, { rating, maxRating }) => {
+  const handleRate = async (e, { rating, maxRating }) => {
     setRating(rating);
     setState({ disabled: true });
-    addRate(recipeId, rating);
+    await addRate(recipeId, rating);
   };
+
   const [Error, setError] = useState("");
-  const { logout } = useAuth();
+  const { logout, currentUser } = useAuth();
+
+  const username = currentUser.displayName || currentUser.email;
   const handleLogout = async () => {
     try {
       await logout().then(() => {
@@ -35,6 +40,13 @@ export default function SingleRecipie(props) {
     }
   };
 
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (comment.length) await addComment(recipeId, comment, username);
+  };
   return (
     <div>
       <div
@@ -91,9 +103,10 @@ export default function SingleRecipie(props) {
 
               <div className="row" style={{ margin: 0, paddingTop: 10 }}>
                 <div className="col s12">
-                  <form>
+                  <form onSubmit={handleCommentSubmit}>
                     <div className="col s9">
                       <input
+                        onChange={handleCommentChange}
                         type="text"
                         placeholder="Please leave a comment"
                         style={{
