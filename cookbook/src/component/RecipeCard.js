@@ -20,11 +20,19 @@ function RecipeCard({ singleRecipe }) {
         <Card.Img variant="top" src={singleRecipe.recipe.image} />
         <Card.Body>
           <Card.Title>
-            <Link style={{textDecoration:"none"}} 
-                  to={{pathname:"/singlerecipie" , 
-                      state: {recipe:singleRecipe.recipe, 
-                  }}}>
-      {singleRecipe.recipe.label}</Link></Card.Title> 
+            <Link
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/singlerecipie",
+                state: {
+                  recipe: singleRecipe.recipe,
+                  recipeId: singleRecipe.recipeId,
+                },
+              }}
+            >
+              {singleRecipe.recipe.label}
+            </Link>
+          </Card.Title>
           <Card.Text style={{ display: "inline - flex" }}>
             <span
               className="material-icons"

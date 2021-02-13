@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Card } from "react-bootstrap";
-import { Image, Reveal } from 'semantic-ui-react'
+import { Image, Reveal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import chef from "../images/chef.svg";
-import {Popup } from 'semantic-ui-react'
+import { Popup } from "semantic-ui-react";
 
 const hourConvert = (time) => {
   const hour = Math.floor(parseInt(time) / 60);
@@ -16,25 +16,28 @@ const hourConvert = (time) => {
 };
 
 const style = {
-    borderRadius: 0,
-    opacity: 0.7,
-    padding: '2em',
-  }
+  borderRadius: 0,
+  opacity: 0.7,
+  padding: "2em",
+};
 
 function RecipeCard({ singleRecipe }) {
   return (
     <Col sm={4}>
-      <Card border="success" style={{borderRadius:0, overflow: "hidden" }}>
-      <Popup
-        trigger={<Card.Img variant="top" src={singleRecipe.recipe.image}/>}
-        content='To see the whole recipe sign up now'
-        position='bottom center'
-        style={style}
-        inverted
+      <Card border="success" style={{ borderRadius: 0, overflow: "hidden" }}>
+        <Popup
+          trigger={<Card.Img variant="top" src={singleRecipe.recipe.image} />}
+          content="To see the whole recipe sign up now"
+          position="bottom center"
+          style={style}
+          inverted
         />
         <Card.Body>
           <Card.Title>
-{singleRecipe.recipe.label}</Card.Title> 
+            <Link style={{ textDecoration: "none" }} to="/login">
+              {singleRecipe.recipe.label}
+            </Link>
+          </Card.Title>
           <Card.Text style={{ display: "inline - flex" }}>
             <span
               className="material-icons"
